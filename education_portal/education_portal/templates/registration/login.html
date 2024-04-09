@@ -1,67 +1,66 @@
 {% load static %}
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Starter Template - Materialize</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Educon</title>
+    <link rel="stylesheet" href="static/css/mystyle.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!--internal css-->
+    <style>
+    </style>
 </head>
+
 <body>
-
-  <div class="row center-align">
+<div class="row center-align">
     <div class="col s6 offset-s3">
-      <h4>Обучение сотрудников</h4>
-      <div class="card">
-          <form method="post" action="" role="form">
-          {% csrf_token %}
-           <h3 class="title is-3">Login</h3>
+        <h2 class="blue-text text-darken-4">Educon</h2>
+        <div class="card medium">
+            <form method="post" role="form">
+                {% csrf_token %}
+                <h3 class="title is-3">Вход</h3>
 
-           <div class="input-field col s12">
-            {{ form.username }}
-            <label for="username">Username</label>
-          </div>
-   
-          <div class="input-field col s12">
-            {{ form.password }}
-            <label for="password">Password</label>
-          </div>
+                <div class="input-field col s12">
+                    {{ form.username }}
+                    <label for="username">Имя пользователя</label>
+                </div>
 
-      {% if form.errors %}
-      <div class="row">
-        <div class="col s12">
-          <span style="color: red; font-weight: bold;">Your username or password did not match.</span>
+                <div class="input-field col s12">
+                    {{ form.password }}
+                    <label for="password">Пароль</label>
+                </div>
+
+                {% if form.errors %}
+                <div class="row">
+                    <div class="col s12">
+                        <span style="color: red; font-weight: bold;">Неверное имя пользователя или пароль.</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="field">
+                    <p class="control">
+                        <button type="submit" value="login" class="btn blue darken-4 waves-effect waves-light">
+                            Войти
+                        </button>
+                    </p>
+                </div>
+
+                <input type="hidden" name="next" value="{{ next }}">
+                <a href="{% url 'signup' %}" class="btn blue darken-4 waves-effect waves-light">
+                    Зарегистрироваться
+                </a>
+            </form>
         </div>
-      </div>
-      {% endif %}
-
-      <div class="field">
-      <p class="control">
-        <button type="submit" value="login" class="btn waves-effect waves-light">
-          Login
-        </button>
-      </p>
     </div>
-
-    <input type="hidden" name="next" value="{{ next }}">
-
-
-
-    <a href="{% url 'signup' %}" class="btn waves-effect waves-light">Create an account</a>
-  </form>
-
-  </div>
-  </div>
 </div>
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="{% static 'js/materialize.js' %}"></script>
-  <script src="{% static 'js/init.js' }"></script>
 
-  </body>
-</html>
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/init.js' }"></script>
+</body>

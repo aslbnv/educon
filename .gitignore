@@ -1,2 +1,4 @@
 /.idea
 /venv
+/education_portal/media
+/education_portal/db.sqlite3

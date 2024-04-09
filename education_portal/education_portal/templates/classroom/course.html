@@ -22,10 +22,8 @@
         {% if teacher_mode == True %}
         <a class="btn-floating btn-large waves-effect waves-light blue darken-4 right"><i class="material-icons">add</i></a>
         {% endif %}
-
         <div class="section ">
             <h4>Информация о курсе</h4>
-            <div class="divider"></div>
             {{ course.syllabus | safe }}
         </div>
     </div>
