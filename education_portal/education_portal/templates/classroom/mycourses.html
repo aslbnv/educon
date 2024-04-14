@@ -18,7 +18,7 @@
                         class="material-icons right">more_vert</i></span>
                 <p class="title"><b>{{ course.enrolled.count }}</b> Человек</p>
                 <br>
-                <a href="{% url 'edit-course' course.id %}" class="btn">Редактировать</a>
+                <a href="{% url 'course' course.id %}" class="btn">Редактировать</a>
                 <a href="{% url 'delete-course' course.id %}" class="btn red">Удалить</a>
             </div>
             <div class="card-reveal">

@@ -1,6 +1,7 @@
 # my
 education_portal/media/
 *sqlite3
+*.pyc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
