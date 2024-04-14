@@ -33,22 +33,26 @@
 
                     <div class="collapsible-body">
                         {% if teacher_mode == True %}
-                        <a href="{% url 'new-page' course.id module.id %}" class="btn-small blue darken-4">
-                            + Добавить новую страницу
-                        </a>
-                        <a href="" class="btn-small blue darken-4">+ Добавить новый тест</a>
+                        <a href="{% url 'new-page' course.id module.id %}" class="btn-small blue darken-4">+ Добавить новую страницу</a>
+                        <a href="{% url 'new-quiz' course.id module.id %}" class="btn-small blue darken-4">+ Добавить новый тест</a>
                         {% endif %}
 
                         <div class="collection">
                             <br>
                             {% for page in module.pages.all %}
-                            <a href="{% url 'page-detail' course.id module.id page.id %}"
-                               class="collection-item blue-text text-darken-4">
-                                §
-                                {{ page.title }}
+                            <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item blue-text text-darken-4">
+                                § {{ page.title }}
                                 <div class="secondary-content black-text">
-                                    Пройдено:
-                                    ○
+                                    Пройдено: ○
+                                </div>
+                            </a>
+                            {% endfor %}
+
+                            {% for quiz in module.quizzes.all %}
+                            <a href="{% url 'quiz-detail' course.id module.id quiz.id %}" class="collection-item blue-text text-darken-4">
+                                🗹 {{ quiz.title }}
+                                <div class="secondary-content black-text">
+                                    Пройдено: ○
                                 </div>
                             </a>
                             {% endfor %}

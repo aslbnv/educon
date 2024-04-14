@@ -10,11 +10,11 @@
 
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
-    <h3 class="title is-3">Edit Profile</h3>
+    <h3 class="title is-3">Профиль</h3>
 
           <div class="file-field input-field">
-            <div class="btn">
-              <span>Picture</span>
+            <div class="btn blue darken-4">
+              <span>Аватар</span>
               {{ form.picture }}
             </div>
             <div class="file-path-wrapper">
@@ -23,8 +23,8 @@
           </div>
 
           <div class="file-field input-field">
-            <div class="btn">
-              <span>Banner</span>
+            <div class="btn blue darken-4">
+              <span>Баннер</span>
               {{ form.banner }}
             </div>
             <div class="file-path-wrapper">
@@ -34,17 +34,17 @@
 
           <div class="input-field col s12">
             {{ form.first_name }}
-            <label for="first_name">First name</label>
+            <label for="first_name">Имя</label>
           </div>
 
           <div class="input-field col s12">
             {{ form.last_name }}
-            <label for="last_name">Last name</label>
+            <label for="last_name">Фамилия</label>
           </div>
 
           <div class="input-field col s12">
             {{ form.location }}
-            <label for="location">Location</label>
+            <label for="location">Город</label>
           </div>
 
           <div class="input-field col s12">
@@ -54,7 +54,7 @@
 
           <div class="input-field col s12">
             {{ form.profile_info }}
-            <label for="profile_info">BIO</label>
+            <label for="profile_info">О себе</label>
           </div>
 
       <div class="row">
@@ -64,9 +64,10 @@
       </div>
 
 
+      <br>
       <div class="field">
       <p class="control">
-        <button type="submit" value="login" class="btn waves-effect waves-light">
+        <button type="submit" value="login" class="btn waves-effect waves-light blue darken-4">
           Сохранить
         </button>
       </p>

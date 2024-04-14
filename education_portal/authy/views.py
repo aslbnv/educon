@@ -34,7 +34,7 @@ def UserProfile(request, username):
 	user = get_object_or_404(User, username=username)
 	profile = Profile.objects.get(user=user)
 
-	template = loader.get_template('profile.html')
+	template = loader.get_template('registration/edit_profile.html')
 
 	context = {
 		'profile':profile,

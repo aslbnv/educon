@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'classroom',
     'module',
     'page',
+    'quiz',
 ]
 
 MIDDLEWARE = [
