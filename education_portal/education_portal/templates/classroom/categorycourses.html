@@ -10,7 +10,7 @@
 
 <div class="row">
     {% for course in courses %}
-    <div class="col s12 m4">
+    <div class="col m4">
         <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ course.picture.url }}">
@@ -20,7 +20,7 @@
                         class="material-icons right">more_vert</i></span>
                 <p class="title"><b>{{ course.enrolled.count }}</b> Человек</p>
                 <br>
-                <a href="{% url 'enroll' course.id %}" class="btn blue darken-4">Пройти</a>
+                <a href="{% url 'course' course.id %}" class="btn blue darken-4">Пройти</a>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Узнать больше<i class="material-icons right">close</i></span>
