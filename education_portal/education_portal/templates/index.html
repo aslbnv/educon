@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block banner %}
-
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br>
         <h2 class="header black-text center">Обучение для сотрудников</h2>
         <h5 class="header col s12 light center">Прокачайте навыки, повысьте квалификацию.</h5>
     </div>
+
     <div class="row center">
         <br>
         <a class="btn-large blue darken-4" href="{% url 'categories' %}">Посмотреть курсы</a>
@@ -16,12 +16,12 @@
 </div>
 {% endblock %}
 
-
 {% block content  %}
 <div class="section ">
     <h4>Курсы, которые я прохожу</h4>
     <div class="divider"></div>
 </div>
+
 <div class="row">
     {% for course in courses %}
     <div class="col s12 m4">
@@ -29,11 +29,13 @@
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ course.picture.url }}">
             </div>
+
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{ course.title }}<i
                         class="material-icons right">more_vert</i></span>
                 <p><a class="blue-text" href="{% url 'course' course.id %}">Продолжить обучение</a></p>
             </div>
+
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Узнать больше<i class="material-icons right">close</i></span>
                 <p>{{ course.description }}</p>

@@ -1,5 +1,4 @@
 {% load static %}
-
 <html lang="en">
 
 <head>
@@ -19,6 +18,7 @@
                 <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
                             class="material-icons left">person</i>Профиль</a></li>
             </ul>
+
             <ul id="nav-mobile" class="sidenav">
                 <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
                             class="material-icons left">person</i>Профиль</a></li>
@@ -36,6 +36,7 @@
                     <img src="{% static 'img/default-blue-banner.png' %}" />
                     {% endif %}
                 </div>
+
                 <a href="#user">
                     {% if nav_profile.picture %}
                     <img src="{{ nav_profile.picture.url }}" class="circle responsive-img" />
@@ -43,50 +44,45 @@
                     <img src="{% static 'img/no_avatar.jpg' %}" class="circle responsive-img" />
                     {% endif %}
                 </a>
-                <a href="#name"><span class="white-text name">
+
+                <a href="#name">
+                    <span class="white-text name">
                         {{ nav_profile.user.first_name }}
                         {{ nav_profile.user.last_name}}
-                    </span></a>
+                    </span>
+                </a>
+
                 <a href="#email">
                     <span class="white-text email">
                         {{ nav_profile.user.email }}
-                    </span></a>
+                    </span>
+                </a>
             </div>
         </li>
-        <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>Мой профиль</a>
-        </li>
+
+        <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>Мой профиль</a></li>
         <li><a href="{% url 'index' %}"><i class="material-icons">tune</i>Панель управления</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
+        <li><div class="divider"></div></li>
         <li><a class="subheader">Обучение</a></li>
         <li><a href="{% url 'categories' %}"><i class="material-icons">school</i>Курсы</a></li>
-<!--        <li><a href=""><i class="material-icons">notifications</i>Уведомления</a></li>-->
-        <li>
-            <div class="divider"></div>
-        </li>
+        <li><div class="divider"></div></li>
         <li><a class="subheader">Преподавание</a></li>
         <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Мои курсы</a></li>
         <li><a href="{% url 'newcourse' %}"><i class="material-icons">note_add</i>Создать курс</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
+        <li><div class="divider"></div></li>
         <li><a href="{% url 'logout' %}"><i class="material-icons">logout</i>Выйти</a></li>
     </ul>
-
     {% block banner %}
     {% endblock %}
 
     <div class="container">
         <div class="section">
-
             {% block content %}
             {% endblock %}
         </div>
     </div>
     <br>
     <br>
-
 
     <footer class="page-footer blue darken-4">
         <div class="container">
@@ -123,8 +119,6 @@
     <script src="{% static 'js/init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-
     {% block javascript %}
     {% endblock %}
-
 </body>

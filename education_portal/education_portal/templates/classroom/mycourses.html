@@ -6,6 +6,7 @@
     <h4>Мои курсы</h4>
     <div class="divider"></div>
 </div>
+
 <div class="row">
     {% for course in courses %}
     <div class="col s12 m4">
@@ -13,6 +14,7 @@
             <div class="card-image waves-effect waves-block waves-light">
                 <a href="{% url 'course' course.id %}"><img class="activator" src="{{ course.picture.url }}"></a>
             </div>
+
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4"><b>{{ course.title }}</b><i
                         class="material-icons right">more_vert</i></span>
@@ -21,6 +23,7 @@
                 <a href="{% url 'course' course.id %}" class="btn">Редактировать</a>
                 <a href="{% url 'delete-course' course.id %}" class="btn red">Удалить</a>
             </div>
+
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Узнать больше<i class="material-icons right">close</i></span>
                 <p>{{ course.description }}</p>

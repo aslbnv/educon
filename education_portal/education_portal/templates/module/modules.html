@@ -20,7 +20,7 @@
 
     <div class="col s9">
         {% if teacher_mode == True %}
-        <a href="{% url 'new-module' course.id %}" class="btn-small blue darken-4 right">+ Добавить новый модуль</a>
+        <a href="{% url 'new-module' course.id %}" class="btn-small blue darken-4 right">+ Добавить модуль</a>
         {% endif %}
         <h4 class="left-align">Модули курса</h4>
         <ul class="collapsible">
@@ -33,8 +33,8 @@
 
                     <div class="collapsible-body">
                         {% if teacher_mode == True %}
-                        <a href="{% url 'new-page' course.id module.id %}" class="btn-small blue darken-4">+ Добавить новую страницу</a>
-                        <a href="{% url 'new-quiz' course.id module.id %}" class="btn-small blue darken-4">+ Добавить новый тест</a>
+                        <a href="{% url 'new-page' course.id module.id %}" class="btn-small blue darken-4">+ Добавить страницу</a>
+                        <a href="{% url 'new-quiz' course.id module.id %}" class="btn-small blue darken-4">+ Добавить тест</a>
                         {% endif %}
 
                         <div class="collection">
