@@ -17,31 +17,4 @@
 {% endblock %}
 
 {% block content  %}
-<div class="section ">
-    <h4>Курсы, которые я прохожу</h4>
-    <div class="divider"></div>
-</div>
-
-<div class="row">
-    {% for course in courses %}
-    <div class="col s12 m4">
-        <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="{{ course.picture.url }}">
-            </div>
-
-            <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{ course.title }}<i
-                        class="material-icons right">more_vert</i></span>
-                <p><a class="blue-text" href="{% url 'course' course.id %}">Продолжить обучение</a></p>
-            </div>
-
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Узнать больше<i class="material-icons right">close</i></span>
-                <p>{{ course.description }}</p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
 {% endblock %}
