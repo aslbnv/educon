@@ -1,5 +1,5 @@
 {% load static %}
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,13 +15,19 @@
         <div class="nav-wrapper container">
             <a href="{% url 'index' %}" class="brand-logo"><i class="material-icons">cloud</i>Educon</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
-                            class="material-icons left">person</i>Профиль</a></li>
+                <li>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
+                    <i class="material-icons left">person</i>Профиль
+                    </a>
+                </li>
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
-                <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i
-                            class="material-icons left">person</i>Профиль</a></li>
+                <li>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
+                        <i class="material-icons left">person</i>Профиль
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -62,10 +68,8 @@
 
         <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>Мой профиль</a></li>
         <li><a href="{% url 'index' %}"><i class="material-icons">tune</i>Панель управления</a></li>
-<!--        <li><div class="divider"></div></li>-->
         <li><a class="subheader">Обучение</a></li>
         <li><a href="{% url 'categories' %}"><i class="material-icons">school</i>Курсы</a></li>
-<!--        <li><div class="divider"></div></li>-->
         <li><a class="subheader">Преподавание</a></li>
         <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Мои курсы</a></li>
         <li><a href="{% url 'newcourse' %}"><i class="material-icons">note_add</i>Создать курс</a></li>
@@ -81,39 +85,9 @@
             {% endblock %}
         </div>
     </div>
-    <br>
-    <br>
+    <br><br>
 
-    <footer class="page-footer blue darken-4">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Зачем нужен Educon?</h5>
-                    <p class="grey-text text-lighten-4">
-                        Данная платформа была разработана с одной главной целью -
-                        упростить обучение персонала и автоматизировать сам процесс
-                        обучения.
-                    </p>
-                </div>
-                <div class="col l3 s12 right">
-                    <h5 class="white-text">Связь с нами</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">ВКонтакте</a></li>
-                        <li><a class="white-text" href="#!">Telegram</a></li>
-                        <li><a class="white-text" href="#!">WhatsApp</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                Сделано
-                <a class="red-text" href="https://zabgu.ru/php/index.php">с любовью</a>
-            </div>
-        </div>
-    </footer>
-
-    <!--  Scripts-->
+    <!-- scripts -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{% static 'js/materialize.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>

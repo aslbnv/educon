@@ -20,11 +20,11 @@
                         class="material-icons right">more_vert</i></span>
                 <p class="title"><b>{{ course.enrolled.count }}</b> Человек</p>
                 <br>
-                <a href="{% url 'course' course.id %}" class="btn blue darken-4">Пройти</a>
+                <a href="{% url 'course' course.id %}" class="btn">Пройти</a>
             </div>
 
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Узнать больше<i class="material-icons right">close</i></span>
+                <span class="card-title grey-text text-darken-4">Информация о курсе<i class="material-icons right">close</i></span>
                 <p>{{ course.description }}</p>
             </div>
         </div>

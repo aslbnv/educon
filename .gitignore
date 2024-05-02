@@ -1,6 +1,6 @@
 # my
 education_portal/media/
-*.sqlite3
+education_portal/db.sqlite3
 *.pyc
 .idea/
 
