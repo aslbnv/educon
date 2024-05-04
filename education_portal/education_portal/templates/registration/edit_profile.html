@@ -1,61 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 
-        
+
 {% block content %}
 
 <div class="row center-align">
   <div class="col s6 offset-s3">
-    <div class="card">
-
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
-    <h3 class="title is-3">Профиль</h3>
+      <h3 class="title is-3">Профиль</h3>
+      <div class="input-field col s12">
+        {{ form.first_name }}
+        <label for="first_name">Имя</label>
+      </div>
 
-          <div class="file-field input-field">
-            <div class="btn blue darken-4">
-              <span>Аватар</span>
-              {{ form.picture }}
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
-          </div>
-
-          <div class="file-field input-field">
-            <div class="btn blue darken-4">
-              <span>Баннер</span>
-              {{ form.banner }}
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
-          </div>
-
-          <div class="input-field col s12">
-            {{ form.first_name }}
-            <label for="first_name">Имя</label>
-          </div>
-
-          <div class="input-field col s12">
-            {{ form.last_name }}
-            <label for="last_name">Фамилия</label>
-          </div>
-
-          <div class="input-field col s12">
-            {{ form.location }}
-            <label for="location">Город</label>
-          </div>
-
-          <div class="input-field col s12">
-            {{ form.url }}
-            <label for="url">URL</label>
-          </div>
-
-          <div class="input-field col s12">
-            {{ form.profile_info }}
-            <label for="profile_info">О себе</label>
-          </div>
+      <div class="input-field col s12">
+        {{ form.last_name }}
+        <label for="last_name">Фамилия</label>
+      </div>
 
       <div class="row">
         <div class="col s12">
@@ -63,20 +25,11 @@
         </div>
       </div>
 
-
-      <br>
-      <div class="field">
-      <p class="control">
-        <button type="submit" value="login" class="btn waves-effect waves-light blue darken-4">
-          Сохранить
-        </button>
-      </p>
-    </div>
-
+      <button type="submit" value="login" class="btn waves-effect waves-light blue darken-4">
+        Сохранить
+      </button>
     </form>
-
   </div>
-</div>
 </div>
 
 {% endblock %}

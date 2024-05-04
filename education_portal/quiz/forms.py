@@ -8,7 +8,7 @@ class NewQuizForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget())
     due = forms.DateField(widget=forms.TextInput(attrs={'class': 'datepicker'}), required=True)
     allowed_attempts = forms.IntegerField(max_value=100, min_value=1)
-    time_limit_mins = forms.IntegerField(max_value=360, min_value=10)
+    time_limit_mins = forms.IntegerField(max_value=360, min_value=5)
 
     class Meta:
         model = Quizzes

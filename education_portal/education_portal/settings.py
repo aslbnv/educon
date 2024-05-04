@@ -139,7 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # login
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
-LOGIN_URL = '/user/login'
+LOGIN_URL = '/auth/login'
 
 # 3rd party apps:
 CKEDITOR_UPLOAD_PATH = "uploads/"

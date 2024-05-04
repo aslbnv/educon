@@ -13,8 +13,7 @@
             <li class="collection-header"><h4>Разделы</h4></li>
             <a href="{% url 'course' course.id %}" class="collection-item active blue darken-4 white-text">Главная</a>
             <a href="{% url 'modules' course.id %}" class="collection-item blue-text text-darken-4">Модули</a>
-            <a href="#!" class="collection-item blue-text text-darken-4">Материалы</a>
-            <a href="#!" class="collection-item blue-text text-darken-4">Вопросы</a>
+            <a href="#!" class="collection-item blue-text text-darken-4">Тестирование</a>
         </ul>
     </div>
 
@@ -23,6 +22,7 @@
         {% endif %}
         <div class="section ">
             <h4>Информация о курсе</h4>
+            <div class="divider"></div>
             {{ course.syllabus | safe }}
         </div>
     </div>
