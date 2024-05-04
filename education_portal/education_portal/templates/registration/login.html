@@ -5,33 +5,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
     <title>Educon</title>
-    <link rel="stylesheet" href="static/css/mystyle.css">
+
+    <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-    <!-- Internal css -->
-    <style>
-    </style>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
 </head>
 
 <body>
 <div class="row center-align">
     <div class="col s6 offset-s3">
         <h2 class="blue-text text-darken-4">Educon</h2>
-        <div class="card medium">
+        <div>
             <form method="post" role="form">
                 {% csrf_token %}
                 <h3 class="title is-3">Вход</h3>
 
                 <div class="input-field col s12">
+                    <span class="left">Имя пользователя</span>
                     {{ form.username }}
-                    <label for="username">Имя пользователя</label>
                 </div>
 
                 <div class="input-field col s12">
+                    <span class="left">Пароль</span>
                     {{ form.password }}
-                    <label for="password">Пароль</label>
                 </div>
 
                 {% if form.errors %}
@@ -50,8 +47,7 @@
                     </p>
                 </div>
 
-                <input type="hidden" name="next" value="{{ next }}">
-                <a href="{% url 'signup' %}" class="btn blue darken-4 waves-effect waves-light">
+                <a href="{% url 'signup' %}" class="btn-small blue darken-4 waves-effect waves-light">
                     Зарегистрироваться
                 </a>
             </form>

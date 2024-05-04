@@ -67,12 +67,12 @@
         </li>
 
         <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>Мой профиль</a></li>
-        <li><a href="{% url 'index' %}"><i class="material-icons">tune</i>Панель управления</a></li>
-        <li><a class="subheader">Обучение</a></li>
         <li><a href="{% url 'categories' %}"><i class="material-icons">school</i>Курсы</a></li>
-        <li><a class="subheader">Преподавание</a></li>
+        {% if nav_profile.user.is_staff %}
+        <li><a class="subheader">Панель управления</a></li>
         <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Управление курсами</a></li>
         <li><a href="{% url 'newcourse' %}"><i class="material-icons">note_add</i>Создать курс</a></li>
+        {% endif %}
         <li><div class="divider"></div></li>
         <li><a href="{% url 'logout' %}"><i class="material-icons">logout</i>Выйти</a></li>
     </ul>
