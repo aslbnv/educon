@@ -6,37 +6,39 @@
   <div class="col s12">
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
-    <h3 class="title is-3">Создание нового курса</h3>
+      <h3 class="title is-3">Создание нового курса</h3>
 
-          <div class="file-field input-field">
-            <div class="btn blue darken-4">
-              <span>Изображение</span>
-              {{ form.picture }}
-            </div>
+      <div class="file-field input-field">
+        <div class="btn waves-effect hoverable blue darken-4">
+          <span>Обложка</span>
+          {{ form.picture }}
+        </div>
 
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
-          </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
 
-          <div class="input-field col s12">
-            {{ form.title }}
-            <label for="title">Название</label>
-          </div>
+      <div class="input-field col s12">
+        <p class="left" style="margin: 0;">Название</p>
+        {{ form.title }}
+      </div>
 
-          <div class="input-field col s12">
-            {{ form.description }}
-            <label for="description">Описание</label>
-          </div>
+      <div class="input-field col s12">
+        <p class="left" style="margin: 0;">Краткое описание</p>
+        {{ form.description }}
+      </div>
 
-          <div class="input-field col s12">
-            {{ form.category }}
-            <label for="location">Категория</label>
-          </div>
+      <div class="input-field col s12">
+        <p class="left" style="margin: 0;">Категория</p>
+        {{ form.category }}
+      </div>
 
-          <div class="input-field col s12">
-            {{ form.syllabus }}
-          </div>
+      <br>
+      Расскажите, о чём будет этот курс
+      <div class="input-field col s12">
+        {{ form.syllabus }}
+      </div>
 
       <div class="row">
         <div class="col s12">
@@ -45,14 +47,14 @@
       </div>
 
       <div class="field">
-      <p class="control">
-        <button type="submit" value="login" class="btn waves-effect waves-light blue darken-4">
-          Сохранить
-        </button>
-      </p>
-    </div>
+        <p class="control">
+          <button type="submit" value="login" class="btn waves-effect hoverable blue darken-4">
+            Сохранить
+          </button>
+        </p>
+      </div>
     </form>
-</div>
+  </div>
 </div>
 
 {% endblock %}

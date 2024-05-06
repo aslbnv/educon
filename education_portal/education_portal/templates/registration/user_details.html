@@ -9,14 +9,15 @@
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
       <h3 class="title is-3">Мои данные</h3>
+      
       <div class="input-field col s12">
+        <p class="left" style="margin: 0;">Имя</p>
         {{ form.first_name }}
-        <label for="first_name">Имя</label>
       </div>
 
       <div class="input-field col s12">
+        <p class="left" style="margin: 0;">Фамилия</p>
         {{ form.last_name }}
-        <label for="last_name">Фамилия</label>
       </div>
 
       <div class="row">
@@ -25,7 +26,7 @@
         </div>
       </div>
 
-      <button type="submit" value="login" class="btn hoverable blue darken-4">
+      <button type="submit" value="login" class="btn waves-effect hoverable blue darken-4">
         Сохранить
       </button>
     </form>

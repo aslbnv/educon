@@ -84,12 +84,14 @@ def PasswordChangeDone(request):
 
 @login_required
 def EditProfile(request):
-	user = request.user.id
-	profile = Profile.objects.get(user__id=user)
-	user_info = User.objects.get(id=user)
+	user = request.user
+	user_id = request.user.id
+	profile = Profile.objects.get(user__id=user_id)
+	user_info = User.objects.get(id=user_id)
+	initial_data = {'first_name': user.first_name, 'last_name': user.last_name}
 
 	if request.method == 'POST':
-		form = EditProfileForm(request.POST, instance=profile)
+		form = EditProfileForm(request.POST, initial=initial_data)
 		if form.is_valid():
 			user_info.first_name = form.cleaned_data.get('first_name')
 			user_info.last_name = form.cleaned_data.get('last_name')
@@ -97,7 +99,8 @@ def EditProfile(request):
 			user_info.save()
 			return redirect('index')
 	else:
-		form = EditProfileForm(instance=profile)
+		init_data = {'first_name': user.first_name, 'last_name': user.last_name}
+		form = EditProfileForm(initial=init_data)
 
 	context = {
 		'form':form,

@@ -49,7 +49,7 @@
             </div>
         </li>
 
-        <li><a href="{% url 'edit-profile' %}"><i class="material-icons">person</i>Мои данные</a></li>
+        <li class=""><a href="{% url 'edit-profile' %}"><i class="material-icons">person</i>Мои данные</a></li>
 
         {% if nav_profile.user.is_staff == False %}
         <li><a href="{% url 'categories' %}"><i class="material-icons">school</i>Обучение</a></li>

@@ -44,7 +44,6 @@ def NewQuestion(request, course_id, module_id, quiz_id):
 			points = form.cleaned_data.get('points')
 			answer_text = request.POST.getlist('answer_text')
 			is_correct = request.POST.getlist('is_correct')
-
 			question = Question.objects.create(question_text=question_text, user=user, points=points)
 
 			for a, c in zip(answer_text, is_correct):

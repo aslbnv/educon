@@ -3,23 +3,29 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from authy.models import Profile
 
+
 def ForbiddenUsers(value):
-	forbidden_users = ['admin', 'css', 'js', 'authenticate', 'login', 'logout', 'administrator', 'root',
-	'email', 'user', 'join', 'sql', 'static', 'python', 'delete']
+	forbidden_users = ['admin', 'css', 'js', 'authenticate', 'login', 'logout',
+	'administrator', 'root', 'email', 'user', 'join', 'sql', 'static', 'python','delete']
+
 	if value.lower() in forbidden_users:
 		raise ValidationError('Invalid name for user, this is a reserverd word.')
+
 
 def InvalidUser(value):
 	if '@' in value or '+' in value or '-' in value:
 		raise ValidationError('This is an Invalid user, Do not user these chars: @ , - , + ')
 
+
 def UniqueEmail(value):
 	if User.objects.filter(email__iexact=value).exists():
 		raise ValidationError('User with this email already exists.')
 
+
 def UniqueUser(value):
 	if User.objects.filter(username__iexact=value).exists():
 		raise ValidationError('User with this username already exists.')
+
 
 class SignupForm(forms.ModelForm):
 	username = forms.CharField(widget=forms.TextInput(), max_length=30, required=True,)
@@ -28,7 +34,6 @@ class SignupForm(forms.ModelForm):
 	confirm_password = forms.CharField(widget=forms.PasswordInput(), required=True, label="Confirm your password.")
 
 	class Meta:
-
 		model = User
 		fields = ('username', 'email', 'password')
 
@@ -74,10 +79,9 @@ class ChangePasswordForm(forms.ModelForm):
 
 
 class EditProfileForm(forms.ModelForm):
-	first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Enter your first name"}), max_length=50, required=True)
+	first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': ''}), max_length=50, required=True)
 	last_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
 	
-
 	class Meta:
 		model = User
 		fields = ['first_name', 'last_name']

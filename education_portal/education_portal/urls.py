@@ -24,7 +24,7 @@ from classroom.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('authy.urls')),
+    path('', include('authy.urls')),
     path('courses/', include('classroom.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('<username>', UserProfile, name='profile'),
