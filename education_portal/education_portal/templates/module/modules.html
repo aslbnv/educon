@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content  %}
+{% block content %}
 <div class="section ">
     <h4>{{ course.title }}</h4>
     <div class="divider"></div>
@@ -10,50 +10,49 @@
 <div class="row">
     <div class="col s3">
         <ul class="collection with-header">
-            <li class="collection-header"><h4>Разделы</h4></li>
+            <li class="collection-header">
+                <h4>Разделы</h4>
+            </li>
             <a href="{% url 'course' course.id %}" class="collection-item blue-text text-darken-4">Главная</a>
             <a href="{% url 'modules' course.id %}" class="collection-item active blue darken-4">Модули</a>
-            <a href="#!" class="collection-item blue-text text-darken-4">Тестирование</a>
+            <a href="{% url 'quiz' course.id %}" class="collection-item blue-text text-darken-4">Тестирование</a>
         </ul>
     </div>
 
     <div class="col s9">
         {% if teacher_mode == True %}
-        <a href="{% url 'new-module' course.id %}" class="btn-small blue darken-4 right">+ Добавить модуль</a>
+        <a href="{% url 'new-module' course.id %}" class="btn-small hoverable waves-effect blue darken-4 right">+
+            Добавить модуль</a>
         {% endif %}
         <h4 class="left-align">Модули</h4>
         <div class="divider"></div>
         <ul class="collapsible">
-                {% for module in course.modules.all %}
-                <li>
-                    <div class="collapsible-header">
-                        <i class="material-icons">expand_more</i>
-                        {{ module.title }}
+            {% for module in course.modules.all %}
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">expand_more</i>
+                    {{ module.title }}
+                </div>
+
+                <div class="collapsible-body">
+                    {% if teacher_mode == True %}
+                    <a href="{% url 'new-page' course.id module.id %}"
+                        class="btn-small hoverable waves-effect blue darken-4">+ Добавить
+                        страницу</a>
+                    {% endif %}
+
+                    <div class="collection">
+                        {% for page in module.pages.all %}
+                        <a href="{% url 'page-detail' course.id module.id page.id %}"
+                            class="collection-item blue-text text-darken-4">
+                            § {{ page.title }}
+                        </a>
+                        {% endfor %}
                     </div>
-
-                    <div class="collapsible-body">
-                        {% if teacher_mode == True %}
-                        <a href="{% url 'new-page' course.id module.id %}" class="btn-small blue darken-4">+ Добавить страницу</a>
-                        <!-- <a href="{% url 'new-quiz' course.id module.id %}" class="btn-small blue darken-4">+ Добавить тест</a> -->
-                        {% endif %}
-
-                        <div class="collection">
-                            {% for page in module.pages.all %}
-                            <a href="{% url 'page-detail' course.id module.id page.id %}" class="collection-item blue-text text-darken-4">
-                                § {{ page.title }}
-                            </a>
-                            {% endfor %}
-
-                            {% for quiz in module.quizzes.all %}
-                            <a href="{% url 'quiz-detail' course.id module.id quiz.id %}" class="collection-item blue-text text-darken-4">
-                                🗹 {{ quiz.title }}
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}

@@ -41,6 +41,6 @@ def CourseModules(request, course_id):
 
     context = {
         'teacher_mode': teacher_mode,
-        'course': course
+        'course': course,
     }
     return render(request, 'module/modules.html', context)

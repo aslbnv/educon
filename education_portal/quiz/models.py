@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-# 3rd apps field
 from ckeditor.fields import RichTextField
 
 
@@ -56,10 +54,6 @@ class Quizzes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = RichTextField()
-    date = models.DateTimeField(auto_now_add=True)
-    due = models.DateField()
-    allowed_attempts = models.PositiveIntegerField()
-    time_limit_mins = models.PositiveIntegerField()
     questions = models.ManyToManyField(Question)
 
     def __str__(self):

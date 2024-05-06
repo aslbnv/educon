@@ -13,9 +13,9 @@
             <li class="collection-header">
                 <h4>Разделы</h4>
             </li>
-            <a href="{% url 'course' course.id %}" class="collection-item active blue darken-4 white-text">Главная</a>
+            <a href="{% url 'course' course.id %}" class="collection-item blue-text text-darken-4">Главная</a>
             <a href="{% url 'modules' course.id %}" class="collection-item blue-text text-darken-4">Модули</a>
-            <a href="{% url 'quiz' course.id %}" class="collection-item blue-text text-darken-4">Тестирование</a>
+            <a href="{% url 'quiz' course.id %}" class="collection-item active blue darken-4">Тестирование</a>
         </ul>
     </div>
 
@@ -23,9 +23,9 @@
         {% if teacher_mode == True %}
         {% endif %}
         <div class="section ">
-            <h4>Информация о курсе</h4>
+            <h4>Тестирование</h4>
             <div class="divider"></div>
-            {{ course.syllabus | safe }}
+            <!-- {{ course.syllabus | safe }} -->
         </div>
     </div>
 </div>

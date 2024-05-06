@@ -1,11 +1,11 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-import uuid
-from module.models import Module
-
-# 3rd apps field
 from ckeditor.fields import RichTextField
+import uuid
+
+from module.models import Module
+from quiz.models import Quizzes
 
 
 # Папка для каждого пользователя с хранимыми файлами, которые пользователь отправляет на сервер
@@ -27,6 +27,7 @@ class Category(models.Model):
         return self.title
 
 
+# Курсы
 class Course(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     picture = models.ImageField(upload_to=user_directory_path)
@@ -39,6 +40,8 @@ class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_owner')
     enrolled = models.ManyToManyField(User)
     modules = models.ManyToManyField(Module)
+    #FK
+    quizzes = models.ManyToManyField(Quizzes)
 
     def __str__(self):
         return self.title

@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+
 from classroom.models import Course, Category
-
 from classroom.forms import NewCourseForm
-
-
-# Create your views here.
 
 
 @login_required
@@ -21,6 +18,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def Categories(request):
     categories = Category.objects.all()
 
@@ -30,6 +28,7 @@ def Categories(request):
     return render(request, 'classroom/categories.html', context)
 
 
+@login_required
 def CategoryCourses(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     courses = Course.objects.filter(category=category)
@@ -41,6 +40,7 @@ def CategoryCourses(request, category_slug):
     return render(request, 'classroom/categorycourses.html', context)
 
 
+@login_required
 def NewCourse(request):
     user = request.user
     if request.method == 'POST':
@@ -56,9 +56,11 @@ def NewCourse(request):
             return redirect('my-courses')
     else:
         form = NewCourseForm()
+
     context = {
         'form': form
     }
+
     return render(request, 'classroom/newcourse.html', context)
 
 
@@ -70,10 +72,12 @@ def CourseDetail(request, course_id):
 
     if user == course.user:
         teacher_mode = True
+
     context = {
         'course': course,
         'teacher_mode': teacher_mode,
     }
+    
     return render(request, 'classroom/course.html', context)
 
 
@@ -82,6 +86,7 @@ def Enroll(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     course.enrolled.add(user)
+
     return redirect('index')
 
 
@@ -94,6 +99,7 @@ def DeleteCourse(request, course_id):
         return HttpResponseForbidden()
     else:
         course.delete()
+
     return redirect('my-courses')
 
 
@@ -101,6 +107,7 @@ def DeleteCourse(request, course_id):
 def EditCourse(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
+
     if user != course.user:
         return HttpResponseForbidden()
     else:
@@ -116,13 +123,16 @@ def EditCourse(request, course_id):
                 return redirect('my-courses')
         else:
             form = NewCourseForm(instance=course)
+
     context = {
         'form': form,
         'course': course,
     }
+
     return render(request, 'classroom/editcourse.html', context)
 
 
+@login_required
 def MyCourses(request):
     user = request.user
     courses = Course.objects.filter(user=user)
@@ -130,4 +140,5 @@ def MyCourses(request):
     context = {
         'courses': courses,
     }
+
     return render(request, 'classroom/mycourses.html', context)

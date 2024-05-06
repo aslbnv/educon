@@ -5,25 +5,22 @@ from django.http import HttpResponseForbidden
 from quiz.forms import NewQuizForm, NewQuestionForm
 from quiz.models import Answer, Question, Quizzes, Attempter, Attempt
 from module.models import Module
+from classroom.models import Course
 
 
 # Создать новый тест
-def NewQuiz(request, course_id, module_id):
+def NewQuiz(request, course_id):
     user = request.user
-    module = get_object_or_404(Module, id=module_id)
+    course = get_object_or_404(Course, id=course_id)
     if request.method == 'POST':
         form = NewQuizForm(request.POST)
         if form.is_valid():
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
-            due = form.cleaned_data.get('due')
-            allowed_attempts = form.cleaned_data.get('allowed_attempts')
-            time_limit_mins = form.cleaned_data.get('time_limit_mins')
-            quiz = Quizzes.objects.create(user=user, title=title, description=description, due=due,
-                                          allowed_attempts=allowed_attempts, time_limit_mins=time_limit_mins)
-            module.quizzes.add(quiz)
-            module.save()
-            return redirect('new-question', course_id=course_id, module_id=module_id, quiz_id=quiz.id)
+            quiz = Quizzes.objects.create(user=user, title=title, description=description)
+            course.quizzes.add(quiz)
+            course.save()
+            return redirect('new-question', course_id=course_id, quiz_id=quiz.id)
     else:
         form = NewQuizForm()
 
@@ -34,7 +31,7 @@ def NewQuiz(request, course_id, module_id):
 
 
 # Создать новый вопрос
-def NewQuestion(request, course_id, module_id, quiz_id):
+def NewQuestion(request, course_id, quiz_id):
 	user = request.user
 	quiz = get_object_or_404(Quizzes, id=quiz_id)
 	if request.method == 'POST':
@@ -52,7 +49,7 @@ def NewQuestion(request, course_id, module_id, quiz_id):
 				question.save()
 				quiz.questions.add(question)
 				quiz.save()
-			return redirect('new-question', course_id=course_id, module_id=module_id, quiz_id=quiz.id)
+			return redirect('new-question', course_id=course_id, quiz_id=quiz.id)
 	else:
 		form = NewQuestionForm()
 
@@ -122,3 +119,19 @@ def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
 		'module_id': module_id,
 	}
 	return render(request, 'quiz/attemptdetail.html', context)
+
+
+def CourseQuizzes(request, course_id):
+    user = request.user
+    course = get_object_or_404(Course, id=course_id)
+
+    teacher_mode = False
+    if user == course.user:
+        teacher_mode = True
+
+    context = {
+        'teacher_mode': teacher_mode,
+        'course': course
+    }
+	
+    return render(request, 'quiz/quiz.html', context)
