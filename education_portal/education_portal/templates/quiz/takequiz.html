@@ -2,44 +2,44 @@
 {% load static %}
 
 {% block content %}
-<div class="section">
-    <h4>{{ quiz.title }}</h4>
+<h4>{{ quiz.title }}</h4>
+<!-- <div class="row"> -->
+<div class="col s12">
+    {{ quiz.description | safe }}
     <div class="divider"></div>
 </div>
 
-<div class="row">
+<form method="post" action="{% url 'submit-quiz' course_id quiz.id %}" role="form" class="col s12">
+    {% csrf_token %}
+    {% for question in quiz.questions.all %}
+    <!-- <div class="divider"></div> -->
     <div class="col s12">
-        {{ quiz.description | safe }}
-        <!-- <div class="divider"></div> -->
+        <p>{{ question.question_text }}</p>
+        <input type="hidden" name="question" value="{{ question.id }}">
     </div>
 
-    <div class="col s12">
-        <form method="post" action="{% url 'submit-quiz' course_id quiz.id %}" role="form" class="col s12">
-            {% csrf_token %}
-            {% for question in quiz.questions.all %}
-            <div class="col s12">
-                <br>
-                <p>{{ question.question_text }}</p>
-                <input type="hidden" name="question" value="{{ question.id }}">
-            </div>
-            {% for answer in question.answers.all %}
-            <div class="input col s12">
-                <label>
-                    <input name="answer" type="checkbox" value="{{ answer.id }}" />
-                    <span>{{ answer.answer_text }}</span>
-                </label>
-            </div>
-            {% endfor %}
-            {% endfor %}
-            <div class="col s12">
-            <br>
-                <button type="submit" value="login" class="btn hoverable waves-effect waves-light blue darken-4">
-                    Сохранить и завершить
-                </button>
-            </div>
-        </form>
+    {% for answer in question.answers.all %}
+    <div class="input col s12">
+        <label>
+            <input name="answer" type="checkbox" value="{{ answer.id }}" />
+            <span>{{ answer.answer_text }}</span>
+        </label>
     </div>
+    {% endfor %}
+    <br>
+    <!-- <div class="divider"></div> -->
+    {% endfor %}
+
+
+    <div class="col s12">
+        <div class="divider"></div>
+        <br>
+        <div class="valign center-block">
+            <button type="submit" value="login" class="btn hoverable waves-effect waves-light blue darken-4">
+                Завершить тест
+            </button>
+        </div>
+    </div>
+</form>
 </div>
-
-
 {% endblock %}
