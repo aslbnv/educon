@@ -5,18 +5,27 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br><br>
-        <h2 class="header black-text center">Обучение для сотрудников</h2>
-        <h5 class="header col s12 light center">Прокачайте навыки, повысьте квалификацию.</h5>
+        <h2 class="header black-text center">С возвращением, {{ nav_profile.user.first_name }}!</h2>
+
+        {% if nav_profile.user.is_staff %}
+        <h5 class="header col s12 light center">Не забывайте проверять успеваемость сотрудников в панели управления.</h5>
+        {% else %}
+        <h5 class="header col s12 light center">Следите за своим обучением и регулярно проверяйте данный раздел.</h5>
+        {% endif %}
     </div>
 
     <div class="row center">
         <br>
-        <a class="btn-large blue darken-4" href="{% url 'categories' %}">Посмотреть курсы</a>
+        {% if nav_profile.user.is_staff %}
+        <a class="btn-large hoverable blue darken-4" href="{% url 'my-courses' %}">Управление курсами</a>
+        {% else %}
+        <a class="btn-large hoverable blue darken-4" href="{% url 'categories' %}">Обучение</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
 
-{% block content  %}
+{% block content %}
 <div class="section">
 </div>
 {% endblock %}

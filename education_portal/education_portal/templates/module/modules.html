@@ -21,7 +21,8 @@
         {% if teacher_mode == True %}
         <a href="{% url 'new-module' course.id %}" class="btn-small blue darken-4 right">+ Добавить модуль</a>
         {% endif %}
-        <h4 class="left-align">Модули курса</h4>
+        <h4 class="left-align">Модули</h4>
+        <div class="divider"></div>
         <ul class="collapsible">
                 {% for module in course.modules.all %}
                 <li>

@@ -17,7 +17,7 @@
             <ul class="right hide-on-med-and-down">
                 <li>
                     <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
-                        <i class="material-icons left">person</i>Профиль
+                        <i class="material-icons left">person</i>Личный кабинет
                     </a>
                 </li>
             </ul>
@@ -34,33 +34,37 @@
 
     <ul id="slide-out" class="sidenav">
         <li>
-            <div class="user-view">
+            <div class="user-view" style="margin: 0;">
                 <div class="background">
                     <img src="{% static 'img/banner.png' %}" />
                 </div>
                 <br>
                 <span class="white-text name">
                     {{ nav_profile.user.first_name }}
-                    {{ nav_profile.user.last_name}}
+                    {{ nav_profile.user.last_name }}
                 </span>
-
                 <span class="white-text email">
                     {{ nav_profile.user.email }}
                 </span>
             </div>
         </li>
 
-        <li><a href="{% url 'profile' nav_profile.user.username %}"><i class="material-icons">person</i>Мой профиль</a>
-        </li>
-        <li><a href="{% url 'categories' %}"><i class="material-icons">school</i>Курсы</a></li>
+        <li><a href="{% url 'edit-profile' %}"><i class="material-icons">person</i>Мои данные</a></li>
+
+        {% if nav_profile.user.is_staff == False %}
+        <li><a href="{% url 'categories' %}"><i class="material-icons">school</i>Обучение</a></li>
+        {% endif %}
+
         {% if nav_profile.user.is_staff %}
-        <li><a class="subheader">Панель управления</a></li>
+        <div style="margin: 0;">
+            <li style="margin: 0;"><a class="subheader" style="margin: 0;">Панель управления</a></li>
+        </div>
+
         <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Управление курсами</a></li>
         <li><a href="{% url 'newcourse' %}"><i class="material-icons">note_add</i>Создать курс</a></li>
         {% endif %}
-        <li>
-            <div class="divider"></div>
-        </li>
+
+        <li><div class="divider" style="margin: 0;"></div></li>
         <li><a href="{% url 'logout' %}"><i class="material-icons">logout</i>Выйти</a></li>
     </ul>
     {% block banner %}

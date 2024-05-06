@@ -8,7 +8,6 @@ from quiz.models import Quizzes
 class Module(models.Model):
     title = models.CharField(max_length=150)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='module_owner')
-    hours = models.PositiveIntegerField()
     pages = models.ManyToManyField(Page)
     quizzes = models.ManyToManyField(Quizzes)
 
