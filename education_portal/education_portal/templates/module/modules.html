@@ -21,9 +21,11 @@
 
     <div class="col s9">
         {% if teacher_mode == True %}
-        <a href="{% url 'new-module' course.id %}" class="btn-small hoverable waves-effect blue darken-4 right">+
-            Добавить модуль</a>
+        <a href="{% url 'new-module' course.id %}" class="btn-small hoverable waves-effect blue darken-4 right">
+            + Добавить модуль
+        </a>
         {% endif %}
+
         <h4 class="left-align">Модули</h4>
         <div class="divider"></div>
         <ul class="collapsible">

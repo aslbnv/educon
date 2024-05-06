@@ -20,12 +20,21 @@
     </div>
 
     <div class="col s9">
-        {% if teacher_mode == True %}
+        {% if teacher_mode == True and course.quizzes.all.count == 0 %}
+        <a href="{% url 'new-quiz' course.id %}" class="btn-small hoverable waves-effect blue darken-4 right">
+            + Добавить тестирование
+        </a>
         {% endif %}
-        <div class="section ">
-            <h4>Тестирование</h4>
-            <div class="divider"></div>
-            <!-- {{ course.syllabus | safe }} -->
+
+        <h4 class="left-align">Тестирование</h4>
+        <div class="divider"></div>
+
+        <div class="collection">
+            {% for quiz in course.quizzes.all %}
+            <a href="{% url 'take-quiz' course.id quiz.id %}" class="collection-item blue-text text-darken-4">
+                {{ quiz.title }}
+            </a>
+            {% endfor %}
         </div>
     </div>
 </div>

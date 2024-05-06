@@ -103,7 +103,8 @@ def EditProfile(request):
 		form = EditProfileForm(initial=init_data)
 
 	context = {
-		'form':form,
+		'form': form,
+		'profile': profile,
 	}
 
 	return render(request, 'registration/user_details.html', context)

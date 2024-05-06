@@ -75,12 +75,11 @@ def QuizDetail(request, course_id, module_id, quiz_id):
 
 
 # Пройти тест
-def TakeQuiz(request, course_id, module_id, quiz_id):
+def TakeQuiz(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     context = {
         'quiz': quiz,
         'course_id': course_id,
-        'module_id': module_id,
     }
     return render(request, 'quiz/takequiz.html', context)
 
