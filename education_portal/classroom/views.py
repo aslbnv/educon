@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
-from classroom.models import Course, Category
+from classroom.models import Course, Category, UserCourses
 from classroom.forms import NewCourseForm
 
 
@@ -28,16 +28,30 @@ def Categories(request):
     return render(request, 'classroom/categories.html', context)
 
 
+# @login_required
+# def Courses(request):
+#     courses = Course.objects.all()
+
+#     context = {
+#         'courses': courses,
+#     }
+
+#     return render(request, 'classroom/courses.html', context)
+
+
 @login_required
-def CategoryCourses(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    courses = Course.objects.filter(category=category)
+def UserCoursesView(request):
+    user = request.user
+    user_courses = UserCourses.objects.filter(user=user)
+
+    courses = []
+    for uc in user_courses:
+        courses.extend(uc.courses.all())
 
     context = {
-        'category': category,
         'courses': courses,
     }
-    return render(request, 'classroom/categorycourses.html', context)
+    return render(request, 'classroom/courses.html', context)
 
 
 @login_required
@@ -49,9 +63,8 @@ def NewCourse(request):
             picture = form.cleaned_data.get('picture')
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
-            category = form.cleaned_data.get('category')
             syllabus = form.cleaned_data.get('syllabus')
-            Course.objects.create(picture=picture, title=title, description=description, category=category,
+            Course.objects.create(picture=picture, title=title, description=description,
                                   syllabus=syllabus, user=user)
             return redirect('my-courses')
     else:
@@ -117,7 +130,6 @@ def EditCourse(request, course_id):
                 course.picture = form.cleaned_data.get('picture')
                 course.title = form.cleaned_data.get('title')
                 course.description = form.cleaned_data.get('description')
-                course.category = form.cleaned_data.get('category')
                 course.syllabus = form.cleaned_data.get('syllabus')
                 course.save()
                 return redirect('my-courses')

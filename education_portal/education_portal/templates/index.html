@@ -19,7 +19,7 @@
         {% if nav_profile.user.is_staff %}
         <a class="btn-large waves-effect hoverable blue darken-4" href="{% url 'my-courses' %}">Управление курсами</a>
         {% else %}
-        <a class="btn-large waves-effect hoverable blue darken-4" href="{% url 'categories' %}">Обучение</a>
+        <a class="btn-large waves-effect hoverable blue darken-4" href="{% url 'courses' %}">Обучение</a>
         {% endif %}
     </div>
 </div>

@@ -14,8 +14,8 @@ def user_directory_path(instance, filename):
     return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 
-# Категории
 class Category(models.Model):
+    """ Категории """
     title = models.CharField(max_length=100, verbose_name='Title')
     icon = models.CharField(max_length=100, verbose_name='Icon', default='article')
     slug = models.SlugField(unique=True)
@@ -27,14 +27,12 @@ class Category(models.Model):
         return self.title
 
 
-# Курсы
 class Course(models.Model):
+    """ Курсы """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     picture = models.ImageField(upload_to=user_directory_path)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=300)
-    # FK
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     syllabus = RichTextField()
     # FK
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_owner')
@@ -45,3 +43,14 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class UserCourses(models.Model):
+    """ Курсы принадлежащие конкретному пользователю """
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student')
+    # courses = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
+    courses = models.ManyToManyField(Course)
+    is_completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
