@@ -12,18 +12,18 @@ urlpatterns = [
     path('mycourses/', MyCourses, name='my-courses'),
     path('categories/', Categories, name='categories'),
     path('categories/<category_slug>', CategoryCourses, name='category-courses'),
-    path('<course_id>/', CourseDetail, name='course'),
+    path('<course_id>', CourseDetail, name='course'),
     path('<course_id>/enroll', Enroll, name='enroll'),
     path('<course_id>/edit', EditCourse, name='edit-course'),
     path('<course_id>/delete', DeleteCourse, name='delete-course'),
     # Modules
-    path('<course_id>/modules/', CourseModules, name='modules'),
+    path('<course_id>/content', CourseModules, name='modules'),
     path('<course_id>/modules/newmodule', NewModule, name='new-module'),
     # Pages
     path('<course_id>/modules/<module_id>/pages/newpage', NewPageModule, name='new-page'),
     path('<course_id>/modules/<module_id>/pages/<page_id>', PageDetail, name='page-detail'),
     # Quiz
-    path('<course_id>/quiz', CourseQuizzes, name='quiz'),
+    path('<course_id>/test', CourseQuizzes, name='quiz'),
     path('<course_id>/quiz/newquiz', NewQuiz, name='new-quiz'),
     path('<course_id>/quiz/<quiz_id>/newquestion', NewQuestion, name='new-question'),
     path('<course_id>/quiz/<quiz_id>/', QuizDetail, name='quiz-detail'),

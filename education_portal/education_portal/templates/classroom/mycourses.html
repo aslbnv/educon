@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content  %}
+{% block content %}
 <div class="section ">
     <h4>Управление курсами</h4>
     <div class="divider"></div>
@@ -18,12 +18,17 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col s11 card-title grey-text text-darken-4"><b>{{ course.title }}</b></div>
-                    <div class="col s1 activator" style="cursor: pointer;"><i class="material-icons right">more_vert</i></div>
+                    <div class="col s1 activator" style="cursor: pointer;"><i class="material-icons right">more_vert</i>
+                    </div>
                 </div>
 
                 <div class="row">
-                    <div class="col s6"><a href="{% url 'course' course.id %}" class="btn waves-effect">Редактировать</a></div>
-                    <div class="col s6"><a href="{% url 'delete-course' course.id %}" class="btn red right waves-effect">Удалить</a></div>
+                    <div class="col s6"><a href="{% url 'course' course.id %}"
+                            class="btn waves-effect">Редактировать</a>
+                    </div>
+                    <div class="col s6"><a href="{% url 'delete-course' course.id %}"
+                            class="btn red right waves-effect">Удалить</a>
+                    </div>
                 </div>
             </div>
 

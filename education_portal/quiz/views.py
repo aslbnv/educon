@@ -39,7 +39,7 @@ def NewQuestion(request, course_id, quiz_id):
 		form = NewQuestionForm(request.POST)
 		if form.is_valid():
 			question_text = form.cleaned_data.get('question_text')
-			points = form.cleaned_data.get('points')
+			points = 1
 			answer_text = request.POST.getlist('answer_text')
 			is_correct = request.POST.getlist('is_correct')
 			question = Question.objects.create(question_text=question_text, user=user, points=points)
@@ -92,10 +92,11 @@ def TakeQuiz(request, course_id, quiz_id):
 
 
 # Отправить решение
-def SubmitAttempt(request, course_id, module_id, quiz_id):
+def SubmitAttempt(request, course_id, quiz_id):
 	user = request.user
 	quiz = get_object_or_404(Quizzes, id=quiz_id)
 	earned_points = 0
+	is_completed = False
 	if request.method == 'POST':
 		questions = request.POST.getlist('question')
 		answers = request.POST.getlist('answer')
@@ -106,9 +107,18 @@ def SubmitAttempt(request, course_id, module_id, quiz_id):
 			answer = Answer.objects.get(id=a)
 			Attempt.objects.create(quiz=quiz, attempter=attempter, question=question, answer=answer)
 			if answer.is_correct == True:
+				is_completed = True
 				earned_points += question.points
 				attempter.score += earned_points
 				attempter.save()
+			else:
+				is_completed = False
+		if (is_completed == True):
+			attempter.test_completed = True
+			attempter.save()
+		attempter.score /= 2
+		attempter.save()
+
 		return redirect('index')
 
 

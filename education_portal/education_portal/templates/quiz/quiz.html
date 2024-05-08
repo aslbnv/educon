@@ -13,9 +13,9 @@
             <li class="collection-header">
                 <h5>Разделы</h5>
             </li>
-            <a href="{% url 'course' course.id %}" class="collection-item blue-text text-darken-4">Главная</a>
-            <a href="{% url 'modules' course.id %}" class="collection-item blue-text text-darken-4">Модули</a>
-            <a href="{% url 'quiz' course.id %}" class="collection-item active blue darken-4">Тестирование</a>
+            <a href="{% url 'course' course.id %}" class="collection-item blue-text text-darken-4">Описание</a>
+            <a href="{% url 'modules' course.id %}" class="collection-item blue-text text-darken-4">Содержание</a>
+            <a href="{% url 'quiz' course.id %}" class="collection-item active blue darken-4">Тест</a>
         </ul>
     </div>
 
@@ -26,7 +26,7 @@
         </a>
         {% endif %}
 
-        <h5 class="left-align">Тестирование</h5>
+        <h5 class="left-align">Тест</h5>
         <div class="divider"></div>
 
         <div class="collection">
