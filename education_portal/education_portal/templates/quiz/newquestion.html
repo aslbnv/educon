@@ -7,73 +7,76 @@
 
         <form method="post" enctype="multipart/form-data" action="" role="form">
             {% csrf_token %}
-            <h3 class="title is-3">Создание нового вопроса</h3>
+            <h3 class="title is-3">Добавить вопрос</h3>
 
             <div class="input-field col s12">
+                <p class="left" style="margin: 0;">Вопрос</p>
                 {{ form.question_text }}
-                <label for="question_text ">Вопрос ?</label>
             </div>
 
-            <div class="input-field col s12">
-                {{ form.points }}
-                <label for="points">Количество баллов за вопрос:</label>
-            </div>
-
+            <!-- Поле ответа 1 -->
             <div class="input-field col s9">
+                <p class="left" style="margin: 0;">Ответ 1</p>
                 <input type="text" name="answer_text" id="id_answer_text" class="validate">
-                <label for="answer_text">Ответ 1</label>
             </div>
 
+            <!-- Поле выбора для ответа 1 -->
             <div class="input-field col s3">
+                <p class="left grey-text" style="margin: 0;">Этот ответ верный?</p>
                 <select id="id_is_correct" name="is_correct">
-                  <option value="" disabled selected>Выберите, да или нет</option>
-                  <option value="True">Да</option>
-                  <option value="False">Нет</option>
+                    <option value="" disabled selected>Выбрать</option>
+                    <option value="True">Да</option>
+                    <option class="" value="False">Нет</option>
                 </select>
-                <label>Этот ответ верный?</label>
-              </div>
+            </div>
 
+            <!-- Поле ответа 2 -->
             <div class="input-field col s9">
+                <p class="left" style="margin: 0;">Ответ 2</p>
                 <input type="text" name="answer_text" id="id_answer_text" class="validate">
-                <label for="answer_text">Ответ 2</label>
             </div>
 
+            <!-- Поле выбора для ответа 2 -->
             <div class="input-field col s3">
+                <p class="left grey-text" style="margin: 0;">Этот ответ верный?</p>
                 <select id="id_is_correct" name="is_correct">
-                  <option value="" disabled selected>Выберите, да или нет</option>
-                  <option value="True">Да</option>
-                  <option value="False">Нет</option>
+                    <option value="" disabled selected>Выбрать</option>
+                    <option value="True">Да</option>
+                    <option value="False">Нет</option>
                 </select>
-                <label>Этот ответ верный?</label>
-              </div>
+            </div>
 
+            <!-- Поле ответа 3 -->
             <div class="input-field col s9">
+                <p class="left" style="margin: 0;">Ответ 3</p>
                 <input type="text" name="answer_text" id="id_answer_text" class="validate">
-                <label for="answer_text">Ответ 3</label>
             </div>
 
+            <!-- Поле выбора для ответа 3 -->
             <div class="input-field col s3">
+                <p class="left grey-text" style="margin: 0;">Этот ответ верный?</p>
                 <select id="id_is_correct" name="is_correct">
-                  <option value="" disabled selected>Выберите, да или нет</option>
-                  <option value="True">Да</option>
-                  <option value="False">Нет</option>
+                    <option value="" disabled selected>Выбрать</option>
+                    <option value="True">Да</option>
+                    <option value="False">Нет</option>
                 </select>
-                <label>Этот ответ верный?</label>
-              </div>
+            </div>
 
+            <!-- Поле ответа 4 -->
             <div class="input-field col s9">
+                <p class="left" style="margin: 0;">Ответ 4</p>
                 <input type="text" name="answer_text" id="id_answer_text" class="validate">
-                <label for="answer_text">Ответ 4</label>
             </div>
 
+            <!-- Поле выбора для ответа 4 -->
             <div class="input-field col s3">
+                <p class="left grey-text" style="margin: 0;">Этот ответ верный?</p>
                 <select id="id_is_correct" name="is_correct">
-                  <option value="" disabled selected>Выберите, да или нет</option>
-                  <option value="True">Да</option>
-                  <option value="False">Нет</option>
+                    <option value="" disabled selected>Выбрать</option>
+                    <option value="True">Да</option>
+                    <option value="False">Нет</option>
                 </select>
-                <label>Этот ответ верный?</label>
-              </div>
+            </div>
 
             <div class="row">
                 <div class="col s12">
@@ -83,14 +86,14 @@
 
             <div class="col s12">
                 <p class="control">
-                    <button type="submit" value="login" class="btn waves-effect waves-light blue darken-4">
-                        Сохранить
+                    <button type="submit" value="login" class="btn hoverable waves-effect blue darken-4">
+                        Добавить вопрос
                     </button>
                 </p>
             </div>
 
             <div class="col s12">
-                <a class="btn blue darken-4" href="{% url 'my-courses' %}">Закончить</a>
+                <a class="btn hoberable blue darken-4" href="{% url 'take-quiz' course_id quiz_id %}">Назад</a>
             </div>
 
         </form>

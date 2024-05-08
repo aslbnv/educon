@@ -21,13 +21,16 @@
       </div>
 
       <div class="input-field col s12">
-        <p class="left" style="margin: 0;"><b>Статус:</b></p>
-        <p class="left" style="margin-left: 5; margin-top: 0;">
-          {% if profile.role == 'admin' %}
-          Администратор
-          {% elif profile.role == 'user' %}
-          Пользователь
-          {% endif %}
+        <p class="left" style="margin: 0; padding: 0;">Статус</p>
+        <br>
+        <p class="left" >
+          <b>
+            {% if profile.role == 'admin' %}
+            Администратор
+            {% elif profile.role == 'user' %}
+            Пользователь
+            {% endif %}
+          </b>
         </p>
       </div>
 

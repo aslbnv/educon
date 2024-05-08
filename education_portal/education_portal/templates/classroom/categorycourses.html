@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content  %}
+{% block content %}
 <div class="section ">
     <h4>{{ category.title }}</h4>
     <div class="divider"></div>
@@ -10,9 +10,9 @@
 <div class="row">
     {% for course in courses %}
     <div class="col m4">
-        <div class="card">
+        <div class="card hoverable">
             <div class="card-image waves-effect waves-block">
-                <img style="cursos:" src="{{ course.picture.url }}">
+                <img src="{{ course.picture.url }}">
             </div>
 
             <div class="card-content">

@@ -64,7 +64,9 @@
         <li><a href="{% url 'newcourse' %}"><i class="material-icons">note_add</i>Создать курс</a></li>
         {% endif %}
 
-        <li><div class="divider" style="margin: 0;"></div></li>
+        <li>
+            <div class="divider" style="margin: 0;"></div>
+        </li>
         <li><a href="{% url 'logout' %}"><i class="material-icons">logout</i>Выйти</a></li>
     </ul>
     {% block banner %}

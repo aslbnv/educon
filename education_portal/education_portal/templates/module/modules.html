@@ -11,7 +11,7 @@
     <div class="col s3">
         <ul class="collection with-header">
             <li class="collection-header">
-                <h4>Разделы</h4>
+                <h5>Разделы</h5>
             </li>
             <a href="{% url 'course' course.id %}" class="collection-item blue-text text-darken-4">Главная</a>
             <a href="{% url 'modules' course.id %}" class="collection-item active blue darken-4">Модули</a>
@@ -26,7 +26,7 @@
         </a>
         {% endif %}
 
-        <h4 class="left-align">Модули</h4>
+        <h5 class="left-align">Модули</h5>
         <div class="divider"></div>
         <ul class="collapsible">
             {% for module in course.modules.all %}

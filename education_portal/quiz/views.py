@@ -6,6 +6,7 @@ from quiz.forms import NewQuizForm, NewQuestionForm
 from quiz.models import Answer, Question, Quizzes, Attempter, Attempt
 from module.models import Module
 from classroom.models import Course
+from authy.models import Profile
 
 
 # Создать новый тест
@@ -30,7 +31,7 @@ def NewQuiz(request, course_id):
     return render(request, 'quiz/newquiz.html', context)
 
 
-# Создать новый вопрос
+# Создать новый вопроса
 def NewQuestion(request, course_id, quiz_id):
 	user = request.user
 	quiz = get_object_or_404(Quizzes, id=quiz_id)
@@ -55,6 +56,8 @@ def NewQuestion(request, course_id, quiz_id):
 
 	context = {
 		'form': form,
+		'quiz_id': quiz_id,
+		'course_id': course_id,
 	}
 	return render(request, 'quiz/newquestion.html', context)
 
@@ -77,10 +80,14 @@ def QuizDetail(request, course_id, module_id, quiz_id):
 # Пройти тест
 def TakeQuiz(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
+    profile = Profile.objects.get(user__id=request.user.id)
+
     context = {
         'quiz': quiz,
         'course_id': course_id,
+		'profile': profile,
     }
+
     return render(request, 'quiz/takequiz.html', context)
 
 
