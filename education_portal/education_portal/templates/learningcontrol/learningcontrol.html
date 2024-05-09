@@ -9,29 +9,46 @@
 </div>
 
 <ul class="collapsible">
-    {% for user in users %}
+    {% for profile in profiles %}
     <li>
         <div class="collapsible-header">
             <i class="material-icons">expand_more</i>
             <div>
-                {{ user.first_name }} {{ user.last_name }}
+                {{ profile.user.first_name }} {{ profile.user.last_name }}
             </div>
         </div>
-
         <div class="collapsible-body">
-            <a href="{% url 'assign-course' %}" class="btn-small hoverable waves-effect blue darken-4">
+            <a href="{% url 'assign-course' profile.id %}" class="btn-small hoverable waves-effect blue darken-4">
                 Назначить курс
                 <i class="material-icons right" style="margin-inline: 5;">add</i>
             </a>
-
             <div class="collection">
-                {% for page in module.pages.all %}
-                <a href="{% url 'page-detail' course.id module.id page.id %}"
-                    class="collection-item blue-text text-darken-4">
-                    § {{ page.title }}
-                </a>
-                {% endfor %}
             </div>
+
+            <table class="highlight">
+                <thead>
+                    <tr>
+                        <th>Курс</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ac in profile.assigned_courses.all %}
+                    <tr>
+                        <td>{{ ac.course }}</td>
+                        <td>
+                            {% if ac.is_completed == False %}
+                            <p class="red-text">Не завершен</p>
+                            {% elif ac.is_completed == True %}
+                            <p class="green-text">
+                                Завершен
+                            </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </li>
     {% endfor %}

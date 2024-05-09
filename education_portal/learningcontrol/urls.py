@@ -3,5 +3,5 @@ from learningcontrol.views import LearningControl, AssignCourse
 
 urlpatterns = [
     path('employees', LearningControl, name='employees'),
-    path('assigncourse', AssignCourse, name='assign-course')
+    path('<profile_id>/assigncourse', AssignCourse, name='assign-course'),
 ]
