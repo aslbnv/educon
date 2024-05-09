@@ -22,7 +22,8 @@
     <div class="col s9">
         {% if teacher_mode == True and course.quizzes.all.count == 0 %}
         <a href="{% url 'new-quiz' course.id %}" class="btn-small hoverable waves-effect blue darken-4 right">
-            + Добавить тестирование
+            Добавить тест
+            <i class="material-icons right">add</i>
         </a>
         {% endif %}
 
