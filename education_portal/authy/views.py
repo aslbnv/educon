@@ -46,7 +46,10 @@ def Signup(request):
 			username = form.cleaned_data.get('username')
 			email = form.cleaned_data.get('email')
 			password = form.cleaned_data.get('password')
-			User.objects.create_user(username=username, email=email, password=password)
+			first_name = form.cleaned_data.get('first_name')
+			last_name = form.cleaned_data.get('last_name')
+			User.objects.create_user(username=username, email=email, password=password,
+			first_name=first_name, last_name=last_name)
 			return redirect('edit-profile')
 	else:
 		form = SignupForm()
@@ -105,6 +108,7 @@ def EditProfile(request):
 	context = {
 		'form': form,
 		'profile': profile,
+		'user': user,
 	}
 
 	return render(request, 'registration/user_details.html', context)

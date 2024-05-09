@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
-from classroom.models import Course, Category, UserCourses
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+from classroom.models import Course, Category
 from classroom.forms import NewCourseForm
+
+from authy.models import Profile
 
 
 @login_required
@@ -28,29 +32,20 @@ def Categories(request):
     return render(request, 'classroom/categories.html', context)
 
 
-# @login_required
-# def Courses(request):
-#     courses = Course.objects.all()
-
-#     context = {
-#         'courses': courses,
-#     }
-
-#     return render(request, 'classroom/courses.html', context)
-
-
 @login_required
-def UserCoursesView(request):
-    user = request.user
-    user_courses = UserCourses.objects.filter(user=user)
+def AssignedCourses(request):
+    profile = Profile.objects.get(user=request.user)
+    unique_courses = set()
 
-    courses = []
-    for uc in user_courses:
-        courses.extend(uc.courses.all())
+    for ac in profile.assigned_courses.all():
+        unique_courses.add(ac.course)
+
+    unique_courses_list = list(unique_courses)
 
     context = {
-        'courses': courses,
+        'courses': unique_courses_list,
     }
+
     return render(request, 'classroom/courses.html', context)
 
 

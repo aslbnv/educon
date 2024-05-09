@@ -1,5 +1,5 @@
 from django.contrib import admin
-from classroom.models import Course, Category, UserCourses
+from classroom.models import Course, Category
 
 # Register your models here.
 
@@ -10,4 +10,3 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Course)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(UserCourses)

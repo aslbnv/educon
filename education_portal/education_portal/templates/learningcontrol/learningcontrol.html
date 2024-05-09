@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section ">
+    <!-- <a href="{% url 'newcourse' %}" class="btn hoverable waves-effect blue darken-4 right">Создать курс</a> -->
+    <h4>Контроль обучения</h4>
+    <div class="divider"></div>
+</div>
+
+<ul class="collapsible">
+    {% for user in users %}
+    <li>
+        <div class="collapsible-header">
+            <i class="material-icons">expand_more</i>
+            <div>
+                {{ user.first_name }} {{ user.last_name }}
+            </div>
+        </div>
+
+        <div class="collapsible-body">
+            <a href="{% url 'assign-course' %}" class="btn-small hoverable waves-effect blue darken-4">
+                Назначить курс
+                <i class="material-icons right" style="margin-inline: 5;">add</i>
+            </a>
+
+            <div class="collection">
+                {% for page in module.pages.all %}
+                <a href="{% url 'page-detail' course.id module.id page.id %}"
+                    class="collection-item blue-text text-darken-4">
+                    § {{ page.title }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

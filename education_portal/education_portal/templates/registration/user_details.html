@@ -27,7 +27,9 @@
           <b>
             {% if profile.role == 'admin' %}
             Администратор
-            {% elif profile.role == 'user' %}
+            {% elif profile.role == 'teacher' %}
+            Учитель
+            {% else %}
             Пользователь
             {% endif %}
           </b>

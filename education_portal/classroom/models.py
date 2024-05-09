@@ -43,14 +43,4 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class UserCourses(models.Model):
-    """ Курсы принадлежащие конкретному пользователю """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student')
-    # courses = models.OneToOneField(Course, on_delete=models.CASCADE, primary_key=True)
-    courses = models.ManyToManyField(Course)
-    is_completed = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user.username
+        

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'module',
     'page',
     'quiz',
+    'learningcontrol'
 ]
 
 MIDDLEWARE = [

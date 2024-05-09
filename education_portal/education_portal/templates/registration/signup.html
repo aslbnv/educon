@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>Educon</title>
 
-    <!-- CSS  -->
+    <!-- css -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -21,33 +21,35 @@
                 <form method="post" action="" role="form">
                     {% csrf_token %}
                     <h3 class="title is-3">Регистрация</h3>
-
+                    <div class="input-field col s12">
+                        <span class="left">Имя</span>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="input-field col s12">
+                        <span class="left">Фамилия</span>
+                        {{ form.last_name }}
+                    </div>
                     <div class="input-field col s12">
                         <span class="left">Имя пользователя</span>
                         {{ form.username }}
                     </div>
-
                     <div class="input-field col s12">
                         <span class="left">Почта</span>
                         {{ form.email }}
                     </div>
-
                     <div class="input-field col s12">
                         <span class="left">Пароль</span>
                         {{ form.password }}
                     </div>
-
                     <div class="input-field col s12">
                         <span class="left">Повторите пароль</span>
                         {{ form.confirm_password }}
                     </div>
-
                     <div class="row">
                         <div class="col s12">
                             <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
                         </div>
                     </div>
-
                     <div>
                         <button type="submit" name="action" class="btn hoverable waves-effect blue darken-4">
                             Зарегистрироваться
