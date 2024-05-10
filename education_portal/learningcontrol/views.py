@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from authy.models import Profile
 from learningcontrol.models import AssignedCourses
-from learningcontrol.forms import AssignCourseForm
+from learningcontrol.forms import AssignCourseForm, UnassignCourseForm
 
 
 # Create your views here.
@@ -40,3 +40,22 @@ def AssignCourse(request, profile_id):
     }
 
     return render(request, 'learningcontrol/assigncourse.html', context)
+
+
+@login_required
+def UnassignCourse(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    if request.method == 'POST':
+        form = UnassignCourseForm(request.POST, profile=profile)
+        if form.is_valid():
+            course = form.cleaned_data.get('course')
+            profile.assigned_courses.filter(course=course).delete()
+            return redirect('employees')
+    else:
+        form = UnassignCourseForm(profile=profile)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'learningcontrol/unassigncourse.html', context)

@@ -10,8 +10,8 @@
 <div class="row">
     {% for course in courses %}
     <div class="col s12 m4">
-        <div class="card hoverable" style="height: 400;">
-            <div class="card-image waves-effect waves-block">
+        <div class="card" style="height: 400;">
+            <div class="card-image">
                 <img src="{{ course.picture.url }}" style="width: 100%; height: 200px;">
             </div>
 
@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <a href="{% url 'course' course.id %}" class="btn">Пройти</a>
+                <a href="{% url 'course' course.id %}" class="btn green">Пройти</a>
             </div>
 
             <div class="card-reveal">

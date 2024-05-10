@@ -3,7 +3,6 @@
 
 {% block content %}
 <div class="section ">
-    <!-- <a href="{% url 'newcourse' %}" class="btn hoverable waves-effect blue darken-4 right">Создать курс</a> -->
     <h4>Контроль обучения</h4>
     <div class="divider"></div>
 </div>
@@ -18,13 +17,15 @@
             </div>
         </div>
         <div class="collapsible-body">
-            <a href="{% url 'assign-course' profile.id %}" class="btn-small hoverable waves-effect blue darken-4">
-                Назначить курс
-                <i class="material-icons right" style="margin-inline: 5;">add</i>
+            <a href="{% url 'assign-course' profile.id %}" class="btn-small green">
+                Добавить курс
+            </a>
+            <a href="{% url 'unassign-course' profile.id %}" class="btn-small red"
+                style="margin-left: 10;">
+                Удалить курс
             </a>
             <div class="collection">
             </div>
-
             <table class="highlight">
                 <thead>
                     <tr>
