@@ -21,7 +21,6 @@
                     </a>
                 </li>
             </ul>
-
             <ul id="nav-mobile" class="sidenav">
                 <li>
                     <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
@@ -31,39 +30,34 @@
             </ul>
         </div>
     </nav>
-
     <ul id="slide-out" class="sidenav">
         <li>
             <div class="user-view" style="margin: 0;">
                 <div class="background">
-                    <img src="{% static 'img/banner.png' %}" />
+                    <img src="{% static 'img/banner.jpg' %}" style="width: 100%; height: auto;" />
                 </div>
                 <br>
                 <span class="white-text name">
-                    {{ nav_profile.user.first_name }}
-                    {{ nav_profile.user.last_name }}
+                    <div>
+                        <h6>{{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</h6>
+                    </div>
                 </span>
                 <span class="white-text email">
                     {{ nav_profile.user.email }}
                 </span>
             </div>
         </li>
-
         <li class=""><a href="{% url 'edit-profile' %}"><i class="material-icons">person</i>Мои данные</a></li>
-
         {% if nav_profile.user.is_staff == False %}
         <li><a href="{% url 'courses' %}"><i class="material-icons">school</i>Обучение</a></li>
         {% endif %}
-
         {% if nav_profile.user.is_staff %}
         <div style="margin: 0;">
             <li style="margin: 0;"><a class="subheader" style="margin: 0;">Панель управления</a></li>
         </div>
-
         <li><a href="{% url 'employees' %}"><i class="material-icons">groups</i>Контроль обучения</a></li>
         <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Управление курсами</a></li>
         {% endif %}
-
         <li>
             <div class="divider" style="margin: 0;"></div>
         </li>
@@ -71,7 +65,6 @@
     </ul>
     {% block banner %}
     {% endblock %}
-
     <div class="container">
         <div class="section">
             {% block content %}
@@ -79,7 +72,6 @@
         </div>
     </div>
     <br><br>
-
     <!-- scripts -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{% static 'js/materialize.js' %}"></script>

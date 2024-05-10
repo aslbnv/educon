@@ -36,16 +36,16 @@
 
         {% if profile.role == 'user' %}
         <div class="">
-            <button type="submit" value="login" class="btn blue darken-4">
+            <button type="submit" value="login" class="btn green darken-1">
                 Завершить тест
             </button>
         </div>
         {% else %}
-        <a href="{% url 'quiz' course_id %}" class="btn hoverable waves-effect blue darken-4">
+        <a href="{% url 'quiz' course_id %}" class="btn red darken-1">
             Назад
         </a>
 
-        <a href="{% url 'new-question' course_id quiz.id %}" class="btn hoverable waves-effect blue darken-4">
+        <a href="{% url 'new-question' course_id quiz.id %}" class="btn green darken-1">
             Добавить вопрос
         </a>
         {% endif %}

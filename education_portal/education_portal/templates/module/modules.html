@@ -21,8 +21,8 @@
 
     <div class="col s9">
         {% if teacher_mode == True %}
-        <a href="{% url 'new-module' course.id %}" class="btn-small hoverable waves-effect blue darken-4 right">
-            + Добавить модуль
+        <a href="{% url 'new-module' course.id %}" class="btn-small hoverable waves-effect green darken-1 right">
+            Добавить модуль
         </a>
         {% endif %}
 
@@ -38,18 +38,15 @@
 
                 <div class="collapsible-body">
                     {% if teacher_mode == True %}
-                    <a href="{% url 'new-page' course.id module.id %}"
-                    
-                        class="btn-small green">Добавить страницу</a>
+                    <a href="{% url 'new-page' course.id module.id %}" class="btn-small green darken-1">Добавить
+                        страницу</a>
                     {% endif %}
-
                     <div class="collection">
-                    <br>
-
+                        <br>
                         {% for page in module.pages.all %}
                         <a href="{% url 'page-detail' course.id module.id page.id %}"
                             class="collection-item blue-text text-darken-4">
-                            § {{ page.title }}
+                            {{ page.title }}
                         </a>
                         {% endfor %}
                     </div>
