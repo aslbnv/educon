@@ -5,10 +5,11 @@
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br><br>
-        <h2 class="header black-text center">Рады вас видеть, {{ nav_profile.user.first_name }}!</h2>
+        <h4 class="header black-text center">Здравствуйте, {{ nav_profile.user.first_name }}!</h4>
 
         {% if nav_profile.user.is_staff %}
-        <h5 class="header col s12 light center">Не забывайте проверять успеваемость сотрудников в панели управления.</h5>
+        <h5 class="header col s12 light center">Не забывайте проверять успеваемость сотрудников в панели управления.
+        </h5>
         {% else %}
         <h5 class="header col s12 light center">Следите за своим обучением и регулярно проверяйте данный раздел.</h5>
         {% endif %}

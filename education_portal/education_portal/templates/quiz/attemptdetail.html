@@ -41,7 +41,8 @@
             {% for answer in question.answers.all %}
             <div class="input col s12">
                 <label>
-                    <input name="answer" type="checkbox" value="{{ answer.id }}" {% if answer.is_correct == True %}checked="checked"{% endif %}/>
+                    <input name="answer" type="checkbox" value="{{ answer.id }}" {% if answer.is_correct==True
+                        %}checked="checked" {% endif %} />
                     <span>{{ answer.answer_text }}</span>
                 </label>
             </div>
@@ -56,7 +57,8 @@
         <h5>Ваши ответы</h5>
         <div class="divider"></div>
         {% for attempt in attempts %}
-        <h5 class="{% if attempt.answer.is_correct == True %}green{% else %}red{% endif %}-text"><b>{{ attempt.answer.answer_text }}</b>
+        <h5 class="{% if attempt.answer.is_correct == True %}green{% else %}red{% endif %}-text"><b>{{
+                attempt.answer.answer_text }}</b>
         </h5>
         {% endfor %}
     </div>
