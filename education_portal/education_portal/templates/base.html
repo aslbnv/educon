@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>Educon</title>
+
+    <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -30,6 +32,7 @@
             </ul>
         </div>
     </nav>
+
     <ul id="slide-out" class="sidenav">
         <li>
             <div class="user-view" style="margin: 0;">
@@ -47,16 +50,32 @@
                 </span>
             </div>
         </li>
-        <li class=""><a href="{% url 'edit-profile' %}"><i class="material-icons">person</i>Мои данные</a></li>
+        <li>
+            <a href="{% url 'edit-profile' %}">
+                <i class="material-icons blue-text text-darken-4">person</i>Мои данные
+            </a>
+        </li>
         {% if nav_profile.user.is_staff == False %}
-        <li><a href="{% url 'courses' %}"><i class="material-icons">school</i>Обучение</a></li>
+        <li>
+            <a href="{% url 'courses' %}"><i class="material-icons blue-text text-darken-4">school</i>Обучение</a>
+        </li>
         {% endif %}
         {% if nav_profile.user.is_staff %}
         <div style="margin: 0;">
             <li style="margin: 0;"><a class="subheader" style="margin: 0;">Панель управления</a></li>
         </div>
-        <li><a href="{% url 'employees' %}"><i class="material-icons">groups</i>Контроль обучения</a></li>
-        <li><a href="{% url 'my-courses' %}"><i class="material-icons">menu_book</i>Управление курсами</a></li>
+        <li>
+            <a href="{% url 'employees' %}">
+                <i class="material-icons blue-text text-darken-4">groups</i>Контроль
+                обучения
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'my-courses' %}">
+                <i class="material-icons blue-text text-darken-4">menu_book</i>Управление
+                курсами
+            </a>
+        </li>
         {% endif %}
         <li>
             <div class="divider" style="margin: 0;"></div>
@@ -65,6 +84,7 @@
     </ul>
     {% block banner %}
     {% endblock %}
+
     <div class="container">
         <div class="section">
             {% block content %}
@@ -72,7 +92,8 @@
         </div>
     </div>
     <br><br>
-    <!-- scripts -->
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{% static 'js/materialize.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
