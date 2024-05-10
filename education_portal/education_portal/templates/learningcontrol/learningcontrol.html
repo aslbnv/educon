@@ -28,9 +28,10 @@
             <table class="highlight">
                 <thead>
                     <tr>
-                        <th>Курс</th>
-                        <th>Статус</th>
-                        <th>Назначен</th>
+                        <th style="font-weight: 600;">Курс</th>
+                        <th style="font-weight: 600;">Статус</th>
+                        <th style="font-weight: 600;">Назначен</th>
+                        <th style="font-weight: 600;">Выполнен</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +51,7 @@
                         <td>{{ ac.date_added|date }}</td>
                         <!-- with hours and minutes -->
                         <!-- <td>{{ ac.date_added }}</td> -->
+                        <td>{{ ac.completion_date|date }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
