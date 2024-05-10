@@ -30,6 +30,7 @@
                     <tr>
                         <th>Курс</th>
                         <th>Статус</th>
+                        <th>Назначен</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +46,10 @@
                             </p>
                             {% endif %}
                         </td>
+                        <!-- without hours and minutes -->
+                        <td>{{ ac.date_added|date }}</td>
+                        <!-- with hours and minutes -->
+                        <!-- <td>{{ ac.date_added }}</td> -->
                     </tr>
                     {% endfor %}
                 </tbody>
