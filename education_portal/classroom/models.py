@@ -36,9 +36,8 @@ class Course(models.Model):
     syllabus = RichTextField()
     # FK
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_owner')
-    enrolled = models.ManyToManyField(User)
     modules = models.ManyToManyField(Module)
-    #FK
+    enrolled = models.ManyToManyField(User)
     quizzes = models.ManyToManyField(Quizzes)
 
     def __str__(self):
