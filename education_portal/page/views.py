@@ -49,5 +49,6 @@ def PageDetail(request, course_id, module_id, page_id):
 
     context = {
         'page': page,
+        'course_id': course_id,
     }
     return render(request, 'page/page.html', context)

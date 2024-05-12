@@ -42,7 +42,9 @@
                         страницу</a>
                     {% endif %}
                     <div class="collection">
+                        {% if teacher_mode == True %}
                         <br>
+                        {% endif %}
                         {% for page in module.pages.all %}
                         <a href="{% url 'page-detail' course.id module.id page.id %}"
                             class="collection-item blue-text text-darken-4">
