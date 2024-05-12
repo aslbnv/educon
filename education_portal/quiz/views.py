@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from datetime import datetime
 
 from quiz.forms import NewQuizForm, NewQuestionForm
 from quiz.models import Answer, Question, Quizzes, Attempter, Attempt
@@ -31,7 +32,7 @@ def NewQuiz(request, course_id):
     return render(request, 'quiz/newquiz.html', context)
 
 
-# Создать новый вопроса
+# Создать новый вопрос
 def NewQuestion(request, course_id, quiz_id):
 	user = request.user
 	quiz = get_object_or_404(Quizzes, id=quiz_id)
@@ -97,6 +98,9 @@ def SubmitAttempt(request, course_id, quiz_id):
 	quiz = get_object_or_404(Quizzes, id=quiz_id)
 	earned_points = 0
 	is_completed = False
+
+	profile = Profile.objects.get(user=request.user)
+	course = get_object_or_404(Course, id=course_id)
 	if request.method == 'POST':
 		questions = request.POST.getlist('question')
 		answers = request.POST.getlist('answer')
@@ -114,6 +118,11 @@ def SubmitAttempt(request, course_id, quiz_id):
 			else:
 				is_completed = False
 		if (is_completed == True):
+			assigned_course = profile.assigned_courses.filter(course=course).first()
+			if assigned_course:
+				assigned_course.is_completed = True
+				assigned_course.completion_date = datetime.now()
+				assigned_course.save()
 			attempter.test_completed = True
 			attempter.save()
 		attempter.score /= 2
