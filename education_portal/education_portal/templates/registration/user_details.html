@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
-
 <div class="row center-align">
   <div class="col s6 offset-s3">
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
       <h4 class="title is-3">Мои данные</h4>
-
-      <div class="input-field col s12">
-        <p class="left" style="margin: 0;">Имя</p>
-        {{ form.first_name }}
+      <div class="row">
+        <div class="input-field col s6">
+          <p class="left" style="margin: 0;">Имя</p>
+          {{ form.first_name }}
+        </div>
+        <div class="input-field col s6">
+          <p class="left" style="margin: 0;">Фамилия</p>
+          {{ form.last_name }}
+        </div>
       </div>
-
-      <div class="input-field col s12">
-        <p class="left" style="margin: 0;">Фамилия</p>
-        {{ form.last_name }}
+      <div class="row">
+        <div class="input-field col s6">
+          <p class="left" style="margin: 0;">Имя пользователя</p>
+          {{ form.username }}
+        </div>
+        <div class="input-field col s6">
+          <p class="left" style="margin: 0;">Почта</p>
+          {{ form.email }}
+        </div>
       </div>
-
       <div class="input-field col s12">
-        <p class="left" style="margin: 0; padding: 0;">Статус</p>
-        <br>
-        <p class="left">
+        <p class="center" style="margin: 0; padding: 0;">Статус</p>
+        <p class="center">
           <b>
             {% if profile.role == 'admin' %}
             Администратор
@@ -35,13 +41,11 @@
           </b>
         </p>
       </div>
-
       <div class="row">
         <div class="col s12">
           <span style="color: red; font-weight: bold;">{{ form.errors }}</span>
         </div>
       </div>
-
       <button type="submit" value="login" class="btn green darken-1">
         Сохранить
       </button>

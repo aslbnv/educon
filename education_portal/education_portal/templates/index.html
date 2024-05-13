@@ -4,24 +4,24 @@
 {% block banner %}
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-        <br><br><br>
+        <br><br>
         <h4 class="header black-text center">Здравствуйте, {{ nav_profile.user.first_name }}!</h4>
-
         {% if nav_profile.user.is_staff %}
-        <h5 class="header col s12 light center">Не забывайте проверять успеваемость сотрудников в панели управления.
+        <h5 class="header col s12 light center">
+            Не забывайте
+            <a href="{% url 'my-courses' %}">
+                управлять курсами
+            </a>
+            и
+            <a href="{% url 'employees' %}">
+                контролировать обучение
+            </a>
+            сотрудников
         </h5>
         {% else %}
-        <h5 class="header col s12 light center">Следите за своим обучением и регулярно проверяйте данный раздел.</h5>
-        {% endif %}
-    </div>
-
-    <div class="row center">
-        <br>
-        {% if nav_profile.user.is_staff %}
-        <a class="btn-large blue darken-4" href="{% url 'employees' %}">Контроль обучения</a>
-        {% else %}
-        <a class="btn-large blue darken-4" href="{% url 'courses' %}">Обучение</a>
-        {% endif %}
+        <h5 class="header col s12 light center">
+            Следите за <a href="{% url 'courses' %}">своим обучением</a> и регулярно посещайте данный раздел
+            {% endif %}
     </div>
 </div>
 {% endblock %}

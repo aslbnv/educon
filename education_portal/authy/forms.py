@@ -81,8 +81,10 @@ class ChangePasswordForm(forms.ModelForm):
 
 
 class EditProfileForm(forms.ModelForm):
-	first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': ''}), max_length=50, required=True)
+	username = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
+	first_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
 	last_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
+	email = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
 	
 	class Meta:
 		model = User
