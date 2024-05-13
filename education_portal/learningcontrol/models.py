@@ -2,6 +2,7 @@ from django.db import models
 
 from classroom.models import Course
 
+
 class AssignedCourses(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     is_completed = models.BooleanField(default=False)
