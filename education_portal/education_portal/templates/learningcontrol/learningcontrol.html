@@ -16,15 +16,13 @@
                 {{ profile.user.first_name }} {{ profile.user.last_name }}
             </div>
         </div>
+
         <div class="collapsible-body">
-            <a href="{% url 'assign-course' profile.id %}" class="btn-small green darken-1">
-                Добавить курс
-            </a>
+            <a href="{% url 'assign-course' profile.id %}" class="btn-small green darken-1">Добавить курс</a>
             <a href="{% url 'unassign-course' profile.id %}" class="btn-small red darken-1" style="margin-left: 10;">
                 Удалить курс
             </a>
-            <div class="collection">
-            </div>
+
             <table class="highlight">
                 <thead>
                     <tr>
@@ -47,11 +45,12 @@
                             </p>
                             {% endif %}
                         </td>
-                        <!-- without hours and minutes -->
-                        <td>{{ ac.date_added|date }}</td>
-                        <!-- with hours and minutes -->
-                        <!-- <td>{{ ac.date_added }}</td> -->
-                        <td>{{ ac.completion_date|date }}</td>
+                        <td>{{ ac.date_added }}</td>
+                        <td>{% if ac.completion_date == None%}
+                            {% else %}
+                            {{ ac.completion_date }}
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
