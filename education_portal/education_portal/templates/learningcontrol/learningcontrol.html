@@ -30,6 +30,7 @@
                         <th style="font-weight: 600;">Статус</th>
                         <th style="font-weight: 600;">Назначен</th>
                         <th style="font-weight: 600;">Выполнен</th>
+                        <th style="font-weight: 600;">Срок сдачи</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,13 @@
                         <td>{% if ac.completion_date == None%}
                             {% else %}
                             {{ ac.completion_date }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if ac.due_date != None%}
+                            {{ ac.due_date }}
+                            {% else %}
+                            Бессрочно
                             {% endif %}
                         </td>
                     </tr>

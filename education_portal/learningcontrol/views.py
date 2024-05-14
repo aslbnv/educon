@@ -28,11 +28,16 @@ def AssignCourse(request, profile_id):
         form = AssignCourseForm(request.POST)
         if form.is_valid():
             course = form.cleaned_data.get("course")
-            # Check if the course is already in the user assigned_courses
+            due_date = form.cleaned_data.get("due_date")
             if profile.assigned_courses.filter(course=course).exists():
                 messages.error(request, "Этот курс уже назначен данному пользователю.")
             else:
-                ac = AssignedCourses.objects.create(course=course)
+                if due_date:
+                    ac = AssignedCourses.objects.create(
+                        course=course, due_date=due_date
+                    )
+                else:
+                    ac = AssignedCourses.objects.create(course=course)
                 profile.assigned_courses.add(ac)
                 profile.save()
                 return redirect("employees")

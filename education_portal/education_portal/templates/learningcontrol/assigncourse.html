@@ -9,8 +9,15 @@
             <h3 class="title is-3">Добавить курс</h3>
 
             <div class="input-field col s12">
-                <p class="left" style="margin: 0;">Выберите курс</p>
+                <p class="left" style="margin: 0; font-weight: 600;">Выберите курс</p>
                 {{ form.course }}
+            </div>
+
+            <div class="input-field col s12">
+                <p class="left" style="margin: 0; font-weight: 600;">Дата сдачи</p>
+                <br>
+                <p class="left" style="margin: 0; font-size: 14;">(В формате год-месяц-день час:минута, или оставьте поле пустым, если оно не нужно)</p>
+                {{ form.due_date }}
             </div>
 
             <div class="row">
