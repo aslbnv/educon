@@ -6,10 +6,13 @@ from django.contrib import messages
 from authy.models import Profile
 from learningcontrol.models import AssignedCourses
 from learningcontrol.forms import AssignCourseForm, UnassignCourseForm
+from learningcontrol.tasks import check_deadlines
 
 
 @login_required
 def LearningControl(request):
+    # Активация фонового процесса для проверки просроченных курсов
+    check_deadlines(repeat=60)
     users = User.objects.filter(is_staff=False)
     profiles = Profile.objects.filter(role="user")
 

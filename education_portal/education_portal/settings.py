@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "quiz",
     "learningcontrol",
     "stats",
+    "background_task",
 ]
 
 MIDDLEWARE = [
