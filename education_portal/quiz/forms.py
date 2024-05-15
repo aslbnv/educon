@@ -4,17 +4,23 @@ from quiz.models import Quizzes, Question, Answer
 
 
 class NewQuizForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate'}), required=True)
+    title = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "validate"}),
+        required=True,
+    )
     description = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = Quizzes
-        fields = ('title', 'description')
+        fields = ("title", "description")
 
 
 class NewQuestionForm(forms.ModelForm):
-    question_text = forms.CharField(widget=forms.TextInput(attrs={'class': 'validate'}), required=True)
+    question_text = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "validate"}),
+        required=True,
+    )
 
     class Meta:
         model = Question
-        fields = ('question_text',)
+        fields = ("question_text",)

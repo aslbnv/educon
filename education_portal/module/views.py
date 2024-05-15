@@ -13,22 +13,22 @@ def NewModule(request, course_id):
     if user != course.user:
         return HttpResponseForbidden()
     else:
-        if request.method == 'POST':
+        if request.method == "POST":
             form = NewModuleForm(request.POST)
             if form.is_valid():
-                title = form.cleaned_data.get('title')
+                title = form.cleaned_data.get("title")
                 m = Module.objects.create(title=title, user=user)
                 course.modules.add(m)
                 course.save()
-                return redirect('modules', course_id=course_id)
+                return redirect("modules", course_id=course_id)
         else:
             form = NewModuleForm()
 
     context = {
-        'form': form,
+        "form": form,
     }
 
-    return render(request, 'module/newmodule.html', context)
+    return render(request, "module/newmodule.html", context)
 
 
 def CourseModules(request, course_id):
@@ -40,7 +40,7 @@ def CourseModules(request, course_id):
         teacher_mode = True
 
     context = {
-        'teacher_mode': teacher_mode,
-        'course': course,
+        "teacher_mode": teacher_mode,
+        "course": course,
     }
-    return render(request, 'module/modules.html', context)
+    return render(request, "module/modules.html", context)

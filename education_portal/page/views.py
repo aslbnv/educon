@@ -18,12 +18,12 @@ def NewPageModule(request, course_id, module_id):
     if user != course.user:
         return HttpResponseForbidden()
     else:
-        if request.method == 'POST':
+        if request.method == "POST":
             form = NewPageForm(request.POST, request.FILES)
             if form.is_valid():
-                title = form.cleaned_data.get('title')
-                content = form.cleaned_data.get('content')
-                files = request.FILES.getlist('files')
+                title = form.cleaned_data.get("title")
+                content = form.cleaned_data.get("content")
+                files = request.FILES.getlist("files")
 
                 for file in files:
                     file_instance = PostFileContent(file=file, user=user)
@@ -34,21 +34,21 @@ def NewPageModule(request, course_id, module_id):
                 p.files.set(files_objs)
                 p.save()
                 module.pages.add(p)
-                return redirect('modules', course_id=course_id)
+                return redirect("modules", course_id=course_id)
         else:
             form = NewPageForm()
     context = {
-        'form': form,
+        "form": form,
     }
 
-    return render(request, 'page/newpage.html', context)
+    return render(request, "page/newpage.html", context)
 
 
 def PageDetail(request, course_id, module_id, page_id):
     page = get_object_or_404(Page, id=page_id)
 
     context = {
-        'page': page,
-        'course_id': course_id,
+        "page": page,
+        "course_id": course_id,
     }
-    return render(request, 'page/page.html', context)
+    return render(request, "page/page.html", context)

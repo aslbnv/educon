@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 
 def user_directory_path(instance, filename):
     # this file will be uploaded to MEDIA_ROOT /the user_(id)/the file
-    return 'user_{0}/{1}'.format(instance.user.id, filename)
+    return "user_{0}/{1}".format(instance.user.id, filename)
 
 
 class PostFileContent(models.Model):
@@ -24,7 +24,7 @@ class Page(models.Model):
     title = models.CharField(max_length=150)
     content = RichTextField()
     files = models.ManyToManyField(PostFileContent)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='page_owner')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="page_owner")
 
     def __str__(self):
         return self.title
