@@ -38,7 +38,9 @@
                     <tr>
                         <td>{{ ac.course }}</td>
                         <td>
-                            {% if ac.is_completed == False %}
+                            {% if ac.is_completed == False and ac.is_expired == True %}
+                            <p class="yellow-text darken-1">Просрочен</p>
+                            {% elif ac.is_completed == False %}
                             <p class="red-text">Не завершен</p>
                             {% elif ac.is_completed == True %}
                             <p class="green-text">
@@ -47,13 +49,13 @@
                             {% endif %}
                         </td>
                         <td>{{ ac.date_added }}</td>
-                        <td>{% if ac.completion_date == None%}
+                        <td>{% if ac.completion_date == None %}
                             {% else %}
                             {{ ac.completion_date }}
                             {% endif %}
                         </td>
                         <td>
-                            {% if ac.due_date != None%}
+                            {% if ac.due_date != None %}
                             {{ ac.due_date }}
                             {% else %}
                             Бессрочно

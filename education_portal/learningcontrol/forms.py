@@ -6,7 +6,7 @@ from authy.models import Profile
 
 class AssignCourseForm(forms.ModelForm):
     course = forms.ModelChoiceField(queryset=Course.objects.all())
-    due_date = forms.DateTimeField(required=False)
+    due_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}), required=False)
 
     class Meta:
         model = AssignedCourses
