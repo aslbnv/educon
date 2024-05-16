@@ -7,7 +7,7 @@
     <div class="divider"></div>
 </div>
 
-<ul class="collapsible">
+<ul class="collapsible expandable">
     {% for profile in profiles %}
     <li>
         <div class="collapsible-header">
@@ -39,7 +39,7 @@
                         <td>{{ ac.course }}</td>
                         <td>
                             {% if ac.is_completed == False and ac.is_expired == True %}
-                            <p class="yellow-text darken-1">Просрочен</p>
+                            <p class="yellow-text text-darken-2">Просрочен</p>
                             {% elif ac.is_completed == False %}
                             <p class="red-text">Не завершен</p>
                             {% elif ac.is_completed == True %}

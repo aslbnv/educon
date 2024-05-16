@@ -2,44 +2,40 @@
 {% load static %}
 
 {% block content %}
+<h4 class="center">Мои данные</h4>
 <div class="row center-align">
   <div class="col s6 offset-s3">
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
-      <h4 class="title is-3">Мои данные</h4>
-      <br>
-      <div class="row">
-        <div class="input-field col s6">
+
+      <div class="row" style="margin-bottom: 0;">
+        <div class="input-field col s7 offset-s3">
           <p class="left" style="margin: 0; font-weight: 600;">Имя</p>
           {{ form.first_name }}
         </div>
-        <div class="input-field col s6">
+      </div>
+
+      <div class="row" style="margin-bottom: 0;">
+        <div class="input-field col s7 offset-s3">
           <p class="left" style="margin: 0; font-weight: 600;">Фамилия</p>
           {{ form.last_name }}
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
+
+      <div class="row" style="margin-bottom: 0;">
+        <div class="input-field col s7 offset-s3">
           <p class="left" style="margin: 0; font-weight: 600;">Имя пользователя</p>
           {{ form.username }}
         </div>
-        <div class="input-field col s6">
+      </div>
+
+      <div class="row" style="margin-bottom: 0;">
+        <div class="input-field col s7 offset-s3">
           <p class="left" style="margin: 0; font-weight: 600;">Почта</p>
           {{ form.email }}
         </div>
       </div>
-      <div class="input-field col s12">
-        <p class="center" style="margin: 0; padding: 0; font-weight: 600;">Статус</p>
-        <p class="center">
-          {% if profile.role == 'admin' %}
-          Администратор
-          {% elif profile.role == 'teacher' %}
-          Учитель
-          {% else %}
-          Пользователь
-          {% endif %}
-        </p>
-      </div>
+
       <div class="row">
         <div class="col s12">
           <span style="color: red; font-weight: bold;">{{ form.errors }}</span>

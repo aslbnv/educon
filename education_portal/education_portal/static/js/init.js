@@ -1,5 +1,5 @@
-(function($){
-  $(function(){
+(function ($) {
+  $(function () {
 
     $('.sidenav').sidenav();
     $('.tabs').tabs();
@@ -9,7 +9,7 @@
     $('.tooltipped').tooltip();
     $('.modal').modal();
     $('.collapsible').collapsible();
-    $('datepicker').datepicker({format:'yyyy-mm-dd'});
+    $('datepicker').datepicker({ format: 'yyyy-mm-dd' });
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
