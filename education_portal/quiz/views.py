@@ -12,6 +12,9 @@ from authy.models import Profile
 
 # Создать новый тест
 def NewQuiz(request, course_id):
+    if request.user.is_staff == False:
+        return redirect("index")
+        
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
@@ -36,6 +39,9 @@ def NewQuiz(request, course_id):
 
 # Создать новый вопрос
 def NewQuestion(request, course_id, quiz_id):
+    if request.user.is_staff == False:
+        return redirect("index")
+        
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     if request.method == "POST":

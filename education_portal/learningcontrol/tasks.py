@@ -5,6 +5,7 @@ from learningcontrol.models import AssignedCourses
 
 @background(schedule=60)  # Проверка каждую минуту
 def check_deadlines():
+    """Метод, который проверят, просрочили ли пользователи свои курсы"""
     assigned_courses = AssignedCourses.objects.filter(
         due_date__isnull=False,
         is_completed=False,
@@ -15,3 +16,7 @@ def check_deadlines():
             course.is_completed = False
             course.is_expired = True
             course.save()
+
+
+# Активация фонового процесса для проверки просроченных курсов
+check_deadlines(repeat=60)

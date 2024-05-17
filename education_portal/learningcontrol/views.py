@@ -11,8 +11,9 @@ from learningcontrol.tasks import check_deadlines
 
 @login_required
 def LearningControl(request):
-    # Активация фонового процесса для проверки просроченных курсов
-    check_deadlines(repeat=60)
+    if request.user.is_staff == False:
+        return redirect("index")
+
     users = User.objects.filter(is_staff=False)
     profiles = Profile.objects.filter(role="user")
 
@@ -26,6 +27,9 @@ def LearningControl(request):
 
 @login_required
 def AssignCourse(request, profile_id):
+    if request.user.is_staff == False:
+        return redirect("index")
+
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == "POST":
         form = AssignCourseForm(request.POST)
@@ -56,6 +60,9 @@ def AssignCourse(request, profile_id):
 
 @login_required
 def UnassignCourse(request, profile_id):
+    if request.user.is_staff == False:
+        return redirect("index")
+
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == "POST":
         form = UnassignCourseForm(request.POST, profile=profile)

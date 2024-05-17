@@ -51,6 +51,9 @@ def AssignedCourses(request):
 
 @login_required
 def NewCourse(request):
+    if request.user.is_staff == False:
+        return redirect("index")
+        
     user = request.user
     if request.method == "POST":
         form = NewCourseForm(request.POST, request.FILES)
@@ -103,6 +106,9 @@ def Enroll(request, course_id):
 
 @login_required
 def DeleteCourse(request, course_id):
+    if request.user.is_staff == False:
+        return redirect("index")
+        
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 
@@ -116,6 +122,9 @@ def DeleteCourse(request, course_id):
 
 @login_required
 def EditCourse(request, course_id):
+    if request.user.is_staff == False:
+        return redirect("index")
+        
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 
@@ -144,6 +153,9 @@ def EditCourse(request, course_id):
 
 @login_required
 def MyCourses(request):
+    if request.user.is_staff == False:
+        return redirect("index")
+        
     user = request.user
     courses = Course.objects.filter(user=user)
 
