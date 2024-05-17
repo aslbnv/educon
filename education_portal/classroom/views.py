@@ -34,16 +34,30 @@ def Categories(request):
 
 @login_required
 def AssignedCourses(request):
+    if request.user.is_staff:
+        return redirect("index")
+
     profile = Profile.objects.get(user=request.user)
-    unique_courses = set()
+    active_courses = set()
+    completed_courses = set()
+    expired_courses = set()
 
     for ac in profile.assigned_courses.all():
-        unique_courses.add(ac.course)
+        if ac.is_completed == True:
+            completed_courses.add(ac.course)
+        if ac.is_completed == False and ac.is_expired == False:
+            active_courses.add(ac.course)
+        if ac.is_expired == True:
+            expired_courses.add(ac.course)
 
-    unique_courses_list = list(unique_courses)
+    active_courses_list = list(active_courses)
+    completed_courses_list = list(completed_courses)
+    expired_courses_list = list(expired_courses)
 
     context = {
-        "courses": unique_courses_list,
+        "active_courses": active_courses_list,
+        "completed_courses": completed_courses_list,
+        "expired_courses": expired_courses_list,
     }
 
     return render(request, "classroom/courses.html", context)
@@ -53,7 +67,7 @@ def AssignedCourses(request):
 def NewCourse(request):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     if request.method == "POST":
         form = NewCourseForm(request.POST, request.FILES)
@@ -108,7 +122,7 @@ def Enroll(request, course_id):
 def DeleteCourse(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 
@@ -124,7 +138,7 @@ def DeleteCourse(request, course_id):
 def EditCourse(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 
@@ -155,7 +169,7 @@ def EditCourse(request, course_id):
 def MyCourses(request):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     courses = Course.objects.filter(user=user)
 
