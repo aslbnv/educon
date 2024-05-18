@@ -9,7 +9,6 @@
 {{ quiz.description | safe }}
 
 <br>
-
 <table class="highlight">
     <thead>
         <tr>
@@ -25,7 +24,7 @@
             <td>
                 <a href="">Попытка {{ forloop.counter }}</a>
             </td>
-            <td>{{ attempt.score }}/ </td>
+            <td>{{ attempt.score }} / {{ max_score }}</td>
             <td>
                 {% if attempt.test_completed %}
                 <span class="green-text text-darken-1">Да</span>

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from datetime import datetime
+from django.urls import reverse
 
 from quiz.forms import NewQuizForm, NewQuestionForm
 from quiz.models import Answer, Question, Quizzes, Attempter, Attempt
@@ -78,12 +79,15 @@ def QuizDetail(request, course_id, quiz_id):
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     my_attempts = Attempter.objects.filter(quiz=quiz, user=user)
+    max_score = sum(question.points for question in quiz.questions.all())
 
     context = {
         "quiz": quiz,
         "my_attempts": my_attempts,
         "course_id": course_id,
+        "max_score": max_score,
     }
+
     return render(request, "quiz/quizdetail.html", context)
 
 
@@ -103,43 +107,49 @@ def TakeQuiz(request, course_id, quiz_id):
 
 # Отправить решение
 def SubmitAttempt(request, course_id, quiz_id):
-    user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
-    earned_points = 0
-    is_completed = False
 
-    profile = Profile.objects.get(user=request.user)
-    course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
         questions = request.POST.getlist("question")
         answers = request.POST.getlist("answer")
-        attempter = Attempter.objects.create(user=user, quiz=quiz, score=0)
+        attempter = Attempter.objects.create(user=request.user, quiz=quiz, score=0)
 
+        questions_number = len(questions)
+        resolved_questions_number = 0
+
+        # Checking questions for correctness
         for q, a in zip(questions, answers):
             question = Question.objects.get(id=q)
             answer = Answer.objects.get(id=a)
-            Attempt.objects.create(
-                quiz=quiz, attempter=attempter, question=question, answer=answer
-            )
-            if answer.is_correct == True:
-                is_completed = True
-                earned_points += question.points
-                attempter.score += earned_points
-                attempter.save()
-            else:
-                is_completed = False
-        if is_completed == True:
-            assigned_course = profile.assigned_courses.filter(course=course).first()
-            if assigned_course:
-                assigned_course.is_completed = True
-                assigned_course.completion_date = datetime.now()
-                assigned_course.save()
+
+            # Create an attempt object
+            Attempt.objects.create(quiz=quiz, attempter=attempter, question=question, answer=answer)
+
+            # Checking to see if the question is resolved
+            if answer.is_correct:
+                resolved_questions_number += 1
+
+        # Mark the course as completed and indicate the date of completion
+        if resolved_questions_number == questions_number:
+            profile = Profile.objects.get(user=request.user)
+            course = get_object_or_404(Course, id=course_id)
+            current_assigned_course = profile.assigned_courses.filter(course=course).first()
+
+            if current_assigned_course:
+                current_assigned_course.is_completed = True
+                current_assigned_course.completion_date = datetime.now()
+                current_assigned_course.save()
+
             attempter.test_completed = True
             attempter.save()
-        attempter.score /= 2
+
+        # Assigning the number of solved questions to the attempter score
+        attempter.score = resolved_questions_number
         attempter.save()
 
-        return redirect("index")
+        return redirect(
+            reverse("quiz-detail", kwargs={"course_id": course_id, "quiz_id": quiz_id})
+        )
 
 
 # Подробности решения
@@ -152,7 +162,6 @@ def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
         "quiz": quiz,
         "attempts": attempts,
         "course_id": course_id,
-        "module_id": module_id,
     }
     return render(request, "quiz/attemptdetail.html", context)
 
