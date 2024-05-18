@@ -38,15 +38,16 @@ def AssignedCourses(request):
         return redirect("index")
 
     profile = Profile.objects.get(user=request.user)
+
     active_courses = set()
     completed_courses = set()
     expired_courses = set()
 
     for ac in profile.assigned_courses.all():
         if ac.is_completed == True:
-            completed_courses.add(ac.course)
+            completed_courses.add(ac)
         if ac.is_completed == False and ac.is_expired == False:
-            active_courses.add(ac.course)
+            active_courses.add(ac)
         if ac.is_expired == True:
             expired_courses.add(ac.course)
 

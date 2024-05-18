@@ -57,7 +57,7 @@
         </li>
         {% if nav_profile.user.is_staff == False %}
         <li>
-            <a href="{% url 'courses' %}"><i class="material-icons blue-text text-darken-4">school</i>Обучение</a>
+            <a href="{% url 'courses' %}"><i class="material-icons blue-text text-darken-4">school</i>Мое обучение</a>
         </li>
         {% endif %}
         {% if nav_profile.user.is_staff %}
