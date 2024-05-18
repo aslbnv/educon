@@ -4,7 +4,7 @@
 {% block content %}
 <!-- Active courses -->
 <div class="section ">
-    <h4>Активные курсы</h4>
+    <h4>Текущие курсы</h4>
     <div class="divider"></div>
 </div>
 
@@ -25,7 +25,7 @@
                         <b>{{ ac.course.title }}</b>
                         <br>
                         <span style="font-size: 17; font-weight: 400;">
-                            Сдать до:
+                            Срок сдачи:
                             {% if ac.due_date %}
                             <span class="red-text text-darken-1">
                                 {{ ac.due_date }}
@@ -55,7 +55,7 @@
 
 <!-- Completed courses -->
 <div class="section ">
-    <h4>Завершённые курсы</h4>
+    <h4>Пройденные курсы</h4>
     <div class="divider"></div>
 </div>
 
@@ -88,7 +88,7 @@
                     <div class="col s1 activator" style="cursor: pointer;"><i class="material-icons right">more_vert</i>
                     </div>
                 </div>
-                <a href="{% url 'course' cc.course.id %}" class="btn left orange darken-1">Повторить материалы</a>
+                <a href="{% url 'course' cc.course.id %}" class="btn blue darken-1">Повторить</a>
                 <br>
                 <br>
                 <p>
