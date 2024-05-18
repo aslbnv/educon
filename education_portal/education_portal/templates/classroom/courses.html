@@ -61,7 +61,8 @@
 
 <div class="row">
     {% if not completed_courses %}
-    <span class="blue-text text-darken-4">У вас пока нет завершённых курсов</span>
+    <span class="yellow-text text-darken-3" style="font-size: 20;">У вас пока нет завершённых курсов или они были
+        удалены Администратором</span>
     {% endif %}
     {% for cc in completed_courses %}
     <div class="col s12 m4">

@@ -31,7 +31,7 @@
 
         <div class="collection">
             {% for quiz in course.quizzes.all %}
-            <a href="{% url 'take-quiz' course.id quiz.id %}" class="collection-item blue-text text-darken-4">
+            <a href="{% url 'quiz-detail' course.id quiz.id %}" class="collection-item blue-text text-darken-4">
                 {{ quiz.title }}
             </a>
             {% endfor %}

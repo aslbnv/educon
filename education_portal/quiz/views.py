@@ -14,7 +14,7 @@ from authy.models import Profile
 def NewQuiz(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
@@ -41,7 +41,7 @@ def NewQuiz(request, course_id):
 def NewQuestion(request, course_id, quiz_id):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     if request.method == "POST":
@@ -74,7 +74,7 @@ def NewQuestion(request, course_id, quiz_id):
 
 
 # Подробности теста
-def QuizDetail(request, course_id, module_id, quiz_id):
+def QuizDetail(request, course_id, quiz_id):
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     my_attempts = Attempter.objects.filter(quiz=quiz, user=user)
@@ -83,7 +83,6 @@ def QuizDetail(request, course_id, module_id, quiz_id):
         "quiz": quiz,
         "my_attempts": my_attempts,
         "course_id": course_id,
-        "module_id": module_id,
     }
     return render(request, "quiz/quizdetail.html", context)
 
