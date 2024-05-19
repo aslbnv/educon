@@ -10,8 +10,9 @@
 
 <div class="row">
     {% if not active_courses %}
-    <span class="green-text text-darken-1" style="font-size: 20;">У вас пока нет назначенных курсов</span>
+    <span>У вас пока нет назначенных курсов</span>
     {% endif %}
+
     {% for ac in active_courses %}
     <div class="col s12 m4">
         <div class="card hoverable sticky-action">
@@ -54,8 +55,7 @@
 
 <div class="row">
     {% if not completed_courses %}
-    <span class="yellow-text text-darken-3" style="font-size: 20;">У вас пока нет завершённых курсов или они были
-        удалены Администратором</span>
+    <span>У вас пока нет пройденных курсов</span>
     {% endif %}
     {% for cc in completed_courses %}
     <div class="col s12 m4">
