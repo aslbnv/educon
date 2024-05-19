@@ -13,28 +13,25 @@
     <div class="col s12 m4">
         <div class="card hoverable sticky-action">
             <!-- image -->
-            <div class="card-image" style="height: 200; cursor: pointer;">
-                <img class="activator" src="{{ course.picture.url }}" style="height: 100%;">
+            <div class="card-image" style="height: 200;">
+                <img src="{{ course.picture.url }}" style="height: 100%;">
             </div>
 
             <!-- card content -->
             <div class="card-content">
-                <span class="card-title grey-text text-darken-4">{{ course.title }}</span>
-            </div>
-
-            <!-- card reveal -->
-            <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">О курсе<i class="material-icons right">close</i></span>
-                <p>{{ course.description }}</p>
+                <span class="card-title" style="font-weight: 350;">{{ course.title }}</span>
+                <span class="grey-text text-darken-2">{{ course.description }}</span>
             </div>
 
             <!-- card actions -->
-            <div class="row">
-                <div class="card-action col s6">
-                    <a href="{% url 'course' course.id %}" class="btn green darken-1 left">Редактировать</a>
-                </div>
-                <div class="card-action col s6">
-                    <a href="{% url 'delete-course' course.id %}" class="btn red darken-1 right">Удалить</a>
+            <div class="card-action">
+                <div class="row" style="margin-bottom: 0;">
+                    <div class="col s6">
+                        <a href="{% url 'course' course.id %}" class="btn green darken-1">Редактировать</a>
+                    </div>
+                    <div class="col s6">
+                        <a href="{% url 'delete-course' course.id %}" class="btn red darken-1 right">Удалить</a>
+                    </div>
                 </div>
             </div>
         </div>
