@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block content %}
-<!-- current courses -->
-<div class="section ">
+<div class="section">
     <h4>Текущие курсы</h4>
     <div class="divider"></div>
 </div>
@@ -16,15 +15,14 @@
     {% for ac in active_courses %}
     <div class="col s12 m4">
         <div class="card hoverable sticky-action">
-            <!-- image -->
             <div class="card-image" style="height: 200;">
                 <img src="{{ ac.course.picture.url }}" style="height: 100%;">
             </div>
 
-            <!-- card content -->
             <div class="card-content">
                 <span class="card-title" style="font-weight: 350;">{{ ac.course.title }}</span>
                 <span class="grey-text text-darken-1">{{ ac.course.description }}</span>
+                <br>
                 <span>Дата сдачи:
                     {% if ac.due_date %}
                     <span class="red-text text-darken-1">{{ ac.due_date }}</span>
@@ -34,7 +32,6 @@
                 </span>
             </div>
 
-            <!-- card actions -->
             <div class="card-action">
                 <div class="row" style="margin-bottom: 0;">
                     <div class="col s6">
@@ -47,8 +44,7 @@
     {% endfor %}
 </div>
 
-<!-- сompleted courses -->
-<div class="section ">
+<div class="section">
     <h4>Пройденные курсы</h4>
     <div class="divider"></div>
 </div>
@@ -60,15 +56,14 @@
     {% for cc in completed_courses %}
     <div class="col s12 m4">
         <div class="card hoverable sticky-action">
-            <!-- image -->
             <div class="card-image" style="height: 200;">
                 <img src="{{ cc.course.picture.url }}" style="height: 100%;">
             </div>
 
-            <!-- card content -->
             <div class="card-content">
                 <span class="card-title" style="font-weight: 350;">{{ cc.course.title }}</span>
                 <span class="grey-text text-darken-1">{{ cc.course.description }}</span>
+                <br>
                 <span>Выполнен:
                     {% if cc.completion_date %}
                     <span class="green-text text-darken-1">{{ cc.completion_date }}</span>
@@ -76,7 +71,6 @@
                 </span>
             </div>
 
-            <!-- card actions -->
             <div class="card-action">
                 <div class="row" style="margin-bottom: 0;">
                     <div class="col s6">
