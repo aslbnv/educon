@@ -7,6 +7,7 @@ from authy.models import Profile
 from learningcontrol.models import AssignedCourses
 from learningcontrol.forms import AssignCourseForm, UnassignCourseForm
 from learningcontrol.tasks import check_deadlines
+from quiz.models import Attempter
 
 
 @login_required
@@ -62,13 +63,25 @@ def AssignCourse(request, profile_id):
 def UnassignCourse(request, profile_id):
     if request.user.is_staff == False:
         return redirect("index")
-
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == "POST":
         form = UnassignCourseForm(request.POST, profile=profile)
         if form.is_valid():
             course = form.cleaned_data.get("course")
             profile.assigned_courses.filter(course=course).delete()
+            # Also delete user attempts in course quiz
+            quizzes = course.quizzes.all()
+            # Get user and quiz
+            user = profile.user
+            if quizzes.exists():
+                quiz = quizzes.first()
+            else:
+                quiz = None
+            # Delete attempters
+            if quiz and user:
+                attempters = Attempter.objects.filter(quiz=quiz, user=user)
+                if attempters.exists():
+                    attempters.delete()
             return redirect("employees")
     else:
         form = UnassignCourseForm(profile=profile)
