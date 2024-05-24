@@ -1,27 +1,17 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
-
 from ckeditor.fields import RichTextField
 import uuid
-
 from module.models import Module
 from quiz.models import Quizzes
 
 
 def user_directory_path(instance, filename):
-    """
-    Users directory to store uploaded files.
-    Upload to MEDIA_ROOT/the user_(id)/file.
-    """
     return "user_{0}/{1}".format(instance.user.id, filename)
 
 
 class Category(models.Model):
-    """
-    Course category.
-    """
-
     title = models.CharField(max_length=100, verbose_name="Title")
     icon = models.CharField(max_length=100, verbose_name="Icon", default="article")
     slug = models.SlugField(unique=True)
@@ -34,10 +24,6 @@ class Category(models.Model):
 
 
 class Course(models.Model):
-    """
-    Educational course.
-    """
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     picture = models.ImageField(upload_to=user_directory_path)
     title = models.CharField(max_length=200)

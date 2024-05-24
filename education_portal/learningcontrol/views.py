@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from authy.models import Profile
 from learningcontrol.models import AssignedCourses
 from learningcontrol.forms import AssignCourseForm, UnassignCourseForm
@@ -14,7 +13,6 @@ from quiz.models import Attempter
 def LearningControl(request):
     if request.user.is_staff == False:
         return redirect("index")
-
     users = User.objects.filter(is_staff=False)
     profiles = Profile.objects.filter(role="user")
 
@@ -30,7 +28,6 @@ def LearningControl(request):
 def AssignCourse(request, profile_id):
     if request.user.is_staff == False:
         return redirect("index")
-
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == "POST":
         form = AssignCourseForm(request.POST)

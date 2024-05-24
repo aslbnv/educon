@@ -1,17 +1,14 @@
 from django.urls import path
-
-from classroom.views import Categories, NewCourse, Enroll, DeleteCourse, EditCourse, MyCourses
+from classroom.views import NewCourse, Enroll, DeleteCourse, EditCourse, MyCourses
 from classroom.views import CourseDetail, AssignedCourses
-
 from module.views import NewModule, CourseModules
 from page.views import NewPageModule, PageDetail
 from quiz.views import NewQuestion, NewQuiz, QuizDetail, TakeQuiz, SubmitAttempt, AttemptDetail, CourseQuizzes
 
 urlpatterns = [
-    # Course - Classroom Views
+    # Course
     path('newcourse', NewCourse, name='newcourse'),
     path('mycourses', MyCourses, name='my-courses'),
-    path('categories', Categories, name='categories'),
     path('assigned', AssignedCourses, name='courses'),
     path('<course_id>', CourseDetail, name='course'),
     path('<course_id>/enroll', Enroll, name='enroll'),

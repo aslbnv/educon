@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
 from classroom.models import Course, Category
 from classroom.forms import NewCourseForm
-
 from authy.models import Profile
 
 
@@ -23,22 +20,10 @@ def index(request):
 
 
 @login_required
-def Categories(request):
-    categories = Category.objects.all()
-
-    context = {
-        "categories": categories,
-    }
-    return render(request, "classroom/categories.html", context)
-
-
-@login_required
 def AssignedCourses(request):
     if request.user.is_staff:
         return redirect("index")
-
     profile = Profile.objects.get(user=request.user)
-
     active_courses = set()
     completed_courses = set()
     expired_courses = set()
@@ -88,7 +73,9 @@ def NewCourse(request):
     else:
         form = NewCourseForm()
 
-    context = {"form": form}
+    context = {
+        "form": form,
+    }
 
     return render(request, "classroom/newcourse.html", context)
 
