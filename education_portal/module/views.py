@@ -9,7 +9,7 @@ from classroom.models import Course
 def NewModule(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 

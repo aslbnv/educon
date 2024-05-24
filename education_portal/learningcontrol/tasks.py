@@ -1,4 +1,5 @@
 from django.utils import timezone
+
 from background_task import background
 from learningcontrol.models import AssignedCourses
 

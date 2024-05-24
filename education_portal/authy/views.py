@@ -2,14 +2,11 @@ from authy.models import Profile
 from authy.forms import SignupForm, ChangePasswordForm, EditProfileForm
 
 from django.shortcuts import render, redirect, get_object_or_404
-
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-
 from django.db.models import Sum
 from django.db import transaction
-
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, resolve
@@ -87,6 +84,7 @@ def PasswordChange(request):
     return render(request, "registration/change_password.html", context)
 
 
+@login_required
 def PasswordChangeDone(request):
     return render(request, "change_password_done.html")
 

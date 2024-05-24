@@ -12,7 +12,7 @@ from page.forms import NewPageForm
 def NewPageModule(request, course_id, module_id):
     if request.user.is_staff == False:
         return redirect("index")
-        
+
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     module = get_object_or_404(Module, id=module_id)

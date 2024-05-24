@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-from datetime import datetime
 from django.urls import reverse
 
 from quiz.forms import NewQuizForm, NewQuestionForm
@@ -10,8 +9,9 @@ from module.models import Module
 from classroom.models import Course
 from authy.models import Profile
 
+from datetime import datetime
 
-# Создать новый тест
+
 def NewQuiz(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
@@ -38,7 +38,6 @@ def NewQuiz(request, course_id):
     return render(request, "quiz/newquiz.html", context)
 
 
-# Создать новый вопрос
 def NewQuestion(request, course_id, quiz_id):
     if request.user.is_staff == False:
         return redirect("index")
@@ -74,7 +73,6 @@ def NewQuestion(request, course_id, quiz_id):
     return render(request, "quiz/newquestion.html", context)
 
 
-# Подробности теста
 def QuizDetail(request, course_id, quiz_id):
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
@@ -91,7 +89,6 @@ def QuizDetail(request, course_id, quiz_id):
     return render(request, "quiz/quizdetail.html", context)
 
 
-# Пройти тест
 def TakeQuiz(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     profile = Profile.objects.get(user__id=request.user.id)
@@ -105,7 +102,6 @@ def TakeQuiz(request, course_id, quiz_id):
     return render(request, "quiz/takequiz.html", context)
 
 
-# Отправить решение
 def SubmitAttempt(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
 
@@ -123,7 +119,9 @@ def SubmitAttempt(request, course_id, quiz_id):
             answer = Answer.objects.get(id=a)
 
             # Create an attempt object
-            Attempt.objects.create(quiz=quiz, attempter=attempter, question=question, answer=answer)
+            Attempt.objects.create(
+                quiz=quiz, attempter=attempter, question=question, answer=answer
+            )
 
             # Checking to see if the question is resolved
             if answer.is_correct:
@@ -133,7 +131,9 @@ def SubmitAttempt(request, course_id, quiz_id):
         if resolved_questions_number == questions_number:
             profile = Profile.objects.get(user=request.user)
             course = get_object_or_404(Course, id=course_id)
-            current_assigned_course = profile.assigned_courses.filter(course=course).first()
+            current_assigned_course = profile.assigned_courses.filter(
+                course=course
+            ).first()
 
             if current_assigned_course:
                 current_assigned_course.is_completed = True
@@ -152,7 +152,6 @@ def SubmitAttempt(request, course_id, quiz_id):
         )
 
 
-# Подробности решения
 def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
