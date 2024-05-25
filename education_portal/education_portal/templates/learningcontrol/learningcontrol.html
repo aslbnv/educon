@@ -13,7 +13,7 @@
         <div class="collapsible-header">
             <i class="material-icons">expand_more</i>
             <div>
-                {{ profile.user.first_name }} {{ profile.user.last_name }}
+                {{ profile.user.last_name }} {{ profile.user.first_name }} {% if profile.patronymic %} {{profile.patronymic}} {% endif %}
             </div>
         </div>
 

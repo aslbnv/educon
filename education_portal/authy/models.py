@@ -12,6 +12,7 @@ from learningcontrol.models import AssignedCourses
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     role = models.CharField(max_length=50, null=True, blank=True)
+    patronymic = models.CharField(max_length=50, null=True, blank=True)
     assigned_courses = models.ManyToManyField(AssignedCourses)
 
     def save(self, *args, **kwargs):

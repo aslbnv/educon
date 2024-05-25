@@ -95,9 +95,10 @@ def EditProfile(request):
     profile = Profile.objects.get(user__id=user.id)
     user_data = User.objects.get(id=user.id)
     init_data = {
+        "username": user.username,
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "last_name": user.last_name,
+        "patronymic": profile.patronymic,
         "email": user.email,
     }
 
@@ -107,14 +108,17 @@ def EditProfile(request):
             user_data.username = form.cleaned_data.get("username")
             user_data.first_name = form.cleaned_data.get("first_name")
             user_data.last_name = form.cleaned_data.get("last_name")
+            profile.patronymic = form.cleaned_data.get("patronymic")
             user_data.email = form.cleaned_data.get("email")
             user_data.save()
+            profile.save()
             return redirect("index")
     else:
         init_data = {
             "username": user.username,
             "first_name": user.first_name,
             "last_name": user.last_name,
+            "patronymic": profile.patronymic,
             "email": user.email,
         }
         form = EditProfileForm(initial=init_data)
@@ -125,4 +129,4 @@ def EditProfile(request):
         "user": user,
     }
 
-    return render(request, "registration/user_details.html", context)
+    return render(request, "registration/user_data.html", context)

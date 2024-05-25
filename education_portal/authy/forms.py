@@ -97,6 +97,7 @@ class EditProfileForm(forms.ModelForm):
 	username = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
 	first_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
 	last_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
+	patronymic = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
 	email = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
 	
 	class Meta:

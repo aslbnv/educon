@@ -84,7 +84,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "education_portal.wsgi.application"
 
 
-# Database
+# База данных
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
@@ -95,7 +95,7 @@ DATABASES = {
 }
 
 
-# Password validation
+# Валидация пароля
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
+# Интернационализация
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = "ru-RU"
@@ -129,7 +129,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static файлы (CSS, JavaScript, Изображения)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
@@ -138,7 +138,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "education_portal/static")]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# login
+# Вход
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "login"
 LOGIN_URL = "/auth/login"
