@@ -4,20 +4,20 @@ from background_task import background
 from learningcontrol.models import AssignedCourses
 
 
-@background(schedule=60)
+@background(schedule=86400)
 def check_deadlines():
-    """A method used to check whether users are past due on their courses. Run every 60 secondsF"""
+    """Проверка курсов на просроченность каждые сутки"""
     assigned_courses = AssignedCourses.objects.filter(
         due_date__isnull=False,
-        is_completed=Falsтe,
+        is_completed=False,
     )
     for course in assigned_courses:
         if timezone.now() > course.due_date:
-            # If current time is bigger then deadline time, update course status
+            # Если текущее время больше времени сдачи, отмечаем курс просроченным
             course.is_completed = False
             course.is_expired = True
             course.save()
 
 
-# Task activation
-check_deadlines(repeat=60)
+# Активируем задачу в фоновом режиме
+check_deadlines(repeat=86400)

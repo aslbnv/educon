@@ -15,7 +15,6 @@ from datetime import datetime
 def NewQuiz(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
-
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
@@ -35,13 +34,13 @@ def NewQuiz(request, course_id):
     context = {
         "form": form,
     }
+
     return render(request, "quiz/newquiz.html", context)
 
 
 def NewQuestion(request, course_id, quiz_id):
     if request.user.is_staff == False:
         return redirect("index")
-
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     if request.method == "POST":
@@ -70,6 +69,7 @@ def NewQuestion(request, course_id, quiz_id):
         "quiz_id": quiz_id,
         "course_id": course_id,
     }
+
     return render(request, "quiz/newquestion.html", context)
 
 
@@ -104,7 +104,6 @@ def TakeQuiz(request, course_id, quiz_id):
 
 def SubmitAttempt(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
-
     if request.method == "POST":
         questions = request.POST.getlist("question")
         answers = request.POST.getlist("answer")
@@ -113,21 +112,22 @@ def SubmitAttempt(request, course_id, quiz_id):
         questions_number = len(questions)
         resolved_questions_number = 0
 
-        # Checking questions for correctness
+        # Проверка ответов на правильность
         for q, a in zip(questions, answers):
             question = Question.objects.get(id=q)
             answer = Answer.objects.get(id=a)
 
-            # Create an attempt object
+            # Создание попытки
             Attempt.objects.create(
                 quiz=quiz, attempter=attempter, question=question, answer=answer
             )
 
-            # Checking to see if the question is resolved
+            # Если ответ правильный, увеличиваем счетчик
             if answer.is_correct:
                 resolved_questions_number += 1
 
-        # Mark the course as completed and indicate the date of completion
+        # Отмечаем курс пройденным и устанавливаем время прохождения если
+        # количество решенных вопросов равно всему количеству вопросов
         if resolved_questions_number == questions_number:
             profile = Profile.objects.get(user=request.user)
             course = get_object_or_404(Course, id=course_id)
@@ -143,13 +143,12 @@ def SubmitAttempt(request, course_id, quiz_id):
             attempter.test_completed = True
             attempter.save()
 
-        # Assigning the number of solved questions to the attempter score
+        # Устанавливаем счет экзаменуемомго, он равен количеству
+        # решенных вопросов
         attempter.score = resolved_questions_number
         attempter.save()
 
-        return redirect(
-            reverse("quiz-detail", kwargs={"course_id": course_id, "quiz_id": quiz_id})
-        )
+        return redirect(reverse("quiz-detail", kwargs={"course_id": course_id, "quiz_id": quiz_id}))
 
 
 def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
@@ -162,6 +161,7 @@ def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
         "attempts": attempts,
         "course_id": course_id,
     }
+
     return render(request, "quiz/attemptdetail.html", context)
 
 
@@ -173,6 +173,9 @@ def CourseQuizzes(request, course_id):
     if user == course.user:
         teacher_mode = True
 
-    context = {"teacher_mode": teacher_mode, "course": course}
+    context = {
+        "teacher_mode": teacher_mode,
+        "course": course,
+    }
 
     return render(request, "quiz/quiz.html", context)
