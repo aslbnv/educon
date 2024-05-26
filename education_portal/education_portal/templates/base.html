@@ -52,38 +52,36 @@
         </li>
         <li>
             <a href="{% url 'edit-profile' %}">
-                <i class="material-icons blue-text text-darken-4">person</i>Мои данные
+                Профиль
             </a>
         </li>
-        {% if nav_profile.user.is_staff == False %}
+        {% if user.profile.role == "user" %}
         <li>
             <a href="{% url 'courses' %}"><i class="material-icons blue-text text-darken-4">school</i>Мое обучение</a>
         </li>
         {% endif %}
-        {% if nav_profile.user.is_staff %}
+        {% if user.profile.role == "admin" %}
         <div style="margin: 0;">
-            <li style="margin: 0;"><a class="subheader" style="margin: 0;">Панель управления</a></li>
+            <li style="margin: 0;"><a class="subheader" style="margin: 0;">Панель администратора</a></li>
         </div>
         <li>
             <a href="{% url 'employees' %}">
-                <i class="material-icons blue-text text-darken-4">groups</i>Контроль
-                обучения
+                Управление обучением
             </a>
         </li>
         <li>
             <a href="{% url 'my-courses' %}">
-                <i class="material-icons blue-text text-darken-4">menu_book</i>Управление
-                курсами
+                Редактор курсов
             </a>
         </li>
         <li>
             <a href="">
-                <i class="material-icons blue-text text-darken-4">equalizer</i>Статистика
+                Статистика
             </a>
         </li>
         <li>
             <a href="{% url 'admin:index' %}">
-                <i class="material-icons blue-text text-darken-4">admin_panel_settings</i>Django панель
+                Администрирование Django
             </a>
         </li>
         {% endif %}
@@ -104,11 +102,11 @@
     <br><br>
 
     <!-- Scripts -->
+    {% block javascript %}
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{% static 'js/materialize.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
-    {% block javascript %}
     {% endblock %}
 </body>
