@@ -5,21 +5,32 @@ from django.contrib import messages
 
 from authy.models import Profile
 from learningcontrol.models import AssignedCourses
-from learningcontrol.forms import AssignCourseForm, UnassignCourseForm
+from learningcontrol.forms import (
+    AssignCourseForm,
+    UnassignCourseForm,
+    EmployeeLastnameFilterForm,
+)
 from learningcontrol.tasks import check_deadlines
 from quiz.models import Attempter
 
 
 @login_required
-def LearningControl(request):
+def employee_profiles(request):
     if request.user.is_staff == False:
         return redirect("index")
-    users = User.objects.filter(is_staff=False)
+
+    # Инициализируем форму с данными запроса GET
+    form = EmployeeLastnameFilterForm(request.GET)
+    last_name = request.GET.get("last_name")
+
     profiles = Profile.objects.filter(role="user")
+    if last_name:
+        profiles = profiles.filter(user__last_name__icontains=last_name)
 
     context = {
-        "users": users,
+        "users": User.objects.filter(is_staff=False),
         "profiles": profiles,
+        "form": form,
     }
 
     return render(request, "learningcontrol/learningcontrol.html", context)

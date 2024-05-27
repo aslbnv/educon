@@ -31,3 +31,7 @@ class UnassignCourseForm(forms.ModelForm):
     class Meta:
         model = AssignedCourses
         fields = ["course"]
+
+
+class EmployeeLastnameFilterForm(forms.Form):
+    last_name = forms.CharField(label="Фамилия", required=False)
