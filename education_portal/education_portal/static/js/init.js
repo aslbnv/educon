@@ -2,6 +2,7 @@
   $(function () {
 
     $('.sidenav').sidenav();
+    $('.dropdown-trigger').dropdown();
     $('.tabs').tabs();
     $('.materialboxed').materialbox();
     $('select').formSelect();

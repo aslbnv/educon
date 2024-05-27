@@ -3,8 +3,10 @@
 
 {% block content %}
 <div class="section ">
-    <a href="{% url 'newcourse' %}" class="btn green darken-1 right">Создать курс</a>
-    <h4>Редактор курсов</h4>
+    <a href="{% url 'newcourse' %}" class="btn green darken-1 right">
+        <span style="font-size: 12px;">Создать курс</span>
+    </a>
+    <h5>Редактор курсов</h5>
     <div class="divider"></div>
 </div>
 
@@ -27,10 +29,14 @@
             <div class="card-action">
                 <div class="row" style="margin-bottom: 0;">
                     <div class="col s6">
-                        <a href="{% url 'course' course.id %}" class="btn green darken-1">Редактировать</a>
+                        <a href="{% url 'course' course.id %}" class="btn green darken-1">
+                            <span style="font-size: 12px;">Редактировать</span>
+                        </a>
                     </div>
                     <div class="col s6">
-                        <a href="{% url 'delete-course' course.id %}" class="btn red darken-1 right">Удалить</a>
+                        <a href="{% url 'delete-course' course.id %}" class="btn red darken-1 right">
+                            <span style="font-size: 12px;">Удалить</span>
+                        </a>
                     </div>
                 </div>
             </div>

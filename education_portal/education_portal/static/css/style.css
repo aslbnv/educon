@@ -5,3 +5,14 @@
  *
  * Made By MaterializeCSS.com
  */
+
+/* label focus color */
+.input-field input:focus+label {
+    color: #08549c !important;
+}
+
+/* label underline focus color */
+.row .input-field input:focus {
+    border-bottom: 1px solid #08549c !important;
+    box-shadow: 0 1px 0 0 #08549c !important
+}

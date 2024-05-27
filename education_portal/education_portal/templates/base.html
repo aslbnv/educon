@@ -13,83 +13,50 @@
 </head>
 
 <body>
-    <nav class="blue darken-4" role="navigation">
-        <div class="nav-wrapper container">
-            <a href="{% url 'index' %}" class="brand-logo"><i class="material-icons">cloud</i>Educon</a>
-            <ul class="right hide-on-med-and-down">
+    <ul id="admin-panel" class="dropdown-content">
+        <li><a href="{% url 'my-courses' %}"><span class="black-text">Редактор курсов</span></a></li>
+        <li><a href="{% url 'employees' %}"><span class="black-text">Управление обучением</span></a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'admin:index' %}"><span class="black-text">Администрирование Django</span></a></li>
+    </ul>
+    <ul id="user-panel" class="dropdown-content">
+        <li><a href="{% url 'edit-profile' %}"><span class="black-text">Профиль</span></a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'logout' %}"><span class="black-text">Выйти</span></a></li>
+    </ul>
+
+    <nav class="light-blue darken-4">
+        <div class="nav-wrapper" style="padding-left: 20px;">
+            <a href="{% url 'index' %}" class="brand-logo">
+                <i class="material-icons">cloud</i>
+                Educon
+            </a>
+
+            {% if user.profile.role == 'user' %}
+            <ul class="hide-on-med-and-down" style="margin-left: 150px;">
                 <li>
-                    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
-                        <i class="material-icons left">person</i>Личный кабинет
+                    <a href="{% url 'courses' %}">
+                        <span style="margin-bottom: 1px; padding-bottom: 1px;">
+                            Моё обучение
+                        </span>
                     </a>
                 </li>
             </ul>
-            <ul id="nav-mobile" class="sidenav">
+            {% endif %}
+
+            <ul class="right hide-on-med-and-down">
+                {% if user.profile.role == 'admin' %}
+                <li><a class="dropdown-trigger" data-target="admin-panel">Панель администратора</a></li>
+                {% endif %}
                 <li>
-                    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
-                        <i class="material-icons left">person</i>Профиль
+                    <a class="dropdown-trigger" data-target="user-panel">
+                        <i class="material-icons">more_vert</i>
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <ul id="slide-out" class="sidenav">
-        <li>
-            <div class="user-view" style="margin: 0;">
-                <div class="background">
-                    <img src="{% static 'img/banner.jpg' %}" style="width: 100%; height: auto;" />
-                </div>
-                <br>
-                <span class="white-text name">
-                    <div>
-                        <h6>{{ nav_profile.user.first_name }} {{ nav_profile.user.last_name }}</h6>
-                    </div>
-                </span>
-                <span class="white-text email">
-                    {{ nav_profile.user.email }}
-                </span>
-            </div>
-        </li>
-        <li>
-            <a href="{% url 'edit-profile' %}">
-                Профиль
-            </a>
-        </li>
-        {% if user.profile.role == "user" %}
-        <li>
-            <a href="{% url 'courses' %}"><i class="material-icons blue-text text-darken-4">school</i>Мое обучение</a>
-        </li>
-        {% endif %}
-        {% if user.profile.role == "admin" %}
-        <div style="margin: 0;">
-            <li style="margin: 0;"><a class="subheader" style="margin: 0;">Панель администратора</a></li>
-        </div>
-        <li>
-            <a href="{% url 'employees' %}">
-                Управление обучением
-            </a>
-        </li>
-        <li>
-            <a href="{% url 'my-courses' %}">
-                Редактор курсов
-            </a>
-        </li>
-        <li>
-            <a href="">
-                Статистика
-            </a>
-        </li>
-        <li>
-            <a href="{% url 'admin:index' %}">
-                Администрирование Django
-            </a>
-        </li>
-        {% endif %}
-        <li>
-            <div class="divider" style="margin: 0;"></div>
-        </li>
-        <li><a href="{% url 'logout' %}"><i class="material-icons">logout</i>Выйти</a></li>
-    </ul>
     {% block banner %}
     {% endblock %}
 
@@ -99,14 +66,13 @@
             {% endblock %}
         </div>
     </div>
-    <br><br>
 
     <!-- Scripts -->
-    {% block javascript %}
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="{% static 'js/materialize.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+    {% block javascript %}
     {% endblock %}
 </body>

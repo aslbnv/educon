@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h4>{{ quiz.title }}</h4>
+<h5>{{ quiz.title }}</h5>
 
 <div class="col s12">
     {{ quiz.description | safe }}
@@ -13,9 +13,7 @@
     {% csrf_token %}
     {% for question in quiz.questions.all %}
     <div class="col s12">
-        <b>
-            <p>{{ question.question_text }}</p>
-        </b>
+        <p style="font-weight: 600;">{{ question.question_text }}</p>
         <input type="hidden" name="question" value="{{ question.id }}">
     </div>
 

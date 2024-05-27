@@ -10,24 +10,24 @@
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection" />
 </head>
 
 <body>
-    <div class="row center-align">
+    <div class="row center-align" style="margin-top: 5%;">
         <div class="col s6 offset-s3">
-            <h2 class="blue-text text-darken-4">Educon</h2>
+            <h4 class="light-blue-text text-darken-4">Educon</h4>
             <div>
                 <form method="post" role="form">
                     {% csrf_token %}
-                    <h3 class="title is-3">Вход</h3>
+                    <h5 class="title is-3">Вход</h5>
 
-                    <div class="input-field col s12">
+                    <div class="input-field col s12" style="margin-bottom: 0;">
                         <span class="left">Имя пользователя</span>
                         {{ form.username }}
                     </div>
 
-                    <div class="input-field col s12">
+                    <div class="input-field col s12" style="margin-bottom: 0;">
                         <span class="left">Пароль</span>
                         {{ form.password }}
                     </div>
@@ -41,7 +41,8 @@
                     {% endif %}
                     <div class="field">
                         <p class="control">
-                            <button type="submit" value="login" class="btn blue darken-4" style="margin-top: 25; margin-bottom: 10;">
+                            <button type="submit" value="login" class="btn light-blue darken-4"
+                                style="margin-top: 25; margin-bottom: 10;">
                                 Войти
                             </button>
                         </p>

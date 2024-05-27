@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="section">
-    <h4>Текущие курсы</h4>
+    <h5>Текущие курсы</h5>
     <div class="divider"></div>
 </div>
 
@@ -45,8 +45,8 @@
 </div>
 
 <div class="section">
-    <h4>Пройденные курсы</h4>
-    <div class="divider"></div>
+    <h5>Пройденные курсы</h5>
+        <div class="divider"></div>
 </div>
 
 <div class="row">
@@ -74,7 +74,7 @@
             <div class="card-action">
                 <div class="row" style="margin-bottom: 0;">
                     <div class="col s6">
-                        <a href="{% url 'course' cc.course.id %}" class="btn blue darken-1">Повторить</a>
+                        <a href="{% url 'course' cc.course.id %}" class="btn light-blue">Повторить</a>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="section">
-    <h4>{{ quiz.title }}</h4>
+    <h5>{{ quiz.title }}</h5>
     <div class="divider"></div>
 </div>
 {{ quiz.description | safe }}
@@ -12,9 +12,9 @@
 <table class="highlight">
     <thead>
         <tr>
-            <th style="font-weight: 600;">Мои попытки</th>
+            <th style="font-weight: 600;">Попытки</th>
             <th style="font-weight: 600;">Баллы</th>
-            <th style="font-weight: 600;">Пройден ли тест?</th>
+            <th style="font-weight: 600;">Результат</th>
         </tr>
     </thead>
 
@@ -27,9 +27,9 @@
             <td>{{ attempt.score }} / {{ max_score }}</td>
             <td>
                 {% if attempt.test_completed %}
-                <span class="green-text text-darken-1">Да</span>
+                <span class="green-text text-darken-1">Пройден</span>
                 {% else %}
-                <span class="red-text text-darken-1">Нет</span>
+                <span class="red-text text-darken-1">Не пройден</span>
                 {% endif %}
             </td>
         </tr>
