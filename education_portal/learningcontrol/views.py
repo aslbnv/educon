@@ -19,13 +19,19 @@ def employee_profiles(request):
     if request.user.is_staff == False:
         return redirect("index")
 
-    # Инициализируем форму с данными запроса GET
     form = EmployeeLastnameFilterForm(request.GET)
     last_name = request.GET.get("last_name")
+    last_name_format = ""
+    if last_name != None:
+        for i in range(len(last_name)):
+            if i == 0:
+                last_name_format += last_name[i].upper()
+            else:
+                last_name_format += last_name[i].lower()
 
     profiles = Profile.objects.filter(role="user")
     if last_name:
-        profiles = profiles.filter(user__last_name__icontains=last_name)
+        profiles = profiles.filter(user__last_name__icontains=last_name_format)
 
     context = {
         "users": User.objects.filter(is_staff=False),
@@ -37,7 +43,7 @@ def employee_profiles(request):
 
 
 @login_required
-def AssignCourse(request, profile_id):
+def assign_course(request, profile_id):
     if request.user.is_staff == False:
         return redirect("index")
     profile = get_object_or_404(Profile, id=profile_id)
@@ -69,7 +75,7 @@ def AssignCourse(request, profile_id):
 
 
 @login_required
-def UnassignCourse(request, profile_id):
+def unassign_course(request, profile_id):
     if request.user.is_staff == False:
         return redirect("index")
     profile = get_object_or_404(Profile, id=profile_id)
