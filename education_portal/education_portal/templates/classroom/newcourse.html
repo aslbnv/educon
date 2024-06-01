@@ -6,10 +6,10 @@
   <div class="col s12">
     <form method="post" enctype="multipart/form-data" action="" role="form">
       {% csrf_token %}
-      <h3 class="title is-3">Создать курс</h3>
+      <h5>Создать курс</h5>
 
       <div class="file-field input-field">
-        <div class="btn blue darken-4">
+        <div class="btn light-blue darken-4">
           <span>Обложка</span>
           {{ form.picture }}
         </div>
@@ -54,5 +54,4 @@
     </form>
   </div>
 </div>
-
 {% endblock %}
