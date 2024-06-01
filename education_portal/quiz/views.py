@@ -12,7 +12,7 @@ from authy.models import Profile
 from datetime import datetime
 
 
-def NewQuiz(request, course_id):
+def new_quiz(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
     user = request.user
@@ -38,7 +38,7 @@ def NewQuiz(request, course_id):
     return render(request, "quiz/newquiz.html", context)
 
 
-def NewQuestion(request, course_id, quiz_id):
+def new_question(request, course_id, quiz_id):
     if request.user.is_staff == False:
         return redirect("index")
     user = request.user
@@ -73,7 +73,7 @@ def NewQuestion(request, course_id, quiz_id):
     return render(request, "quiz/newquestion.html", context)
 
 
-def QuizDetail(request, course_id, quiz_id):
+def quiz_detail(request, course_id, quiz_id):
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     my_attempts = Attempter.objects.filter(quiz=quiz, user=user)
@@ -89,7 +89,7 @@ def QuizDetail(request, course_id, quiz_id):
     return render(request, "quiz/quizdetail.html", context)
 
 
-def TakeQuiz(request, course_id, quiz_id):
+def take_quiz(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     profile = Profile.objects.get(user__id=request.user.id)
 
@@ -102,7 +102,7 @@ def TakeQuiz(request, course_id, quiz_id):
     return render(request, "quiz/takequiz.html", context)
 
 
-def SubmitAttempt(request, course_id, quiz_id):
+def submit_attempt(request, course_id, quiz_id):
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     if request.method == "POST":
         questions = request.POST.getlist("question")
@@ -148,10 +148,12 @@ def SubmitAttempt(request, course_id, quiz_id):
         attempter.score = resolved_questions_number
         attempter.save()
 
-        return redirect(reverse("quiz-detail", kwargs={"course_id": course_id, "quiz_id": quiz_id}))
+        return redirect(
+            reverse("quiz-detail", kwargs={"course_id": course_id, "quiz_id": quiz_id})
+        )
 
 
-def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
+def attempt_detail(request, course_id, module_id, quiz_id, attempt_id):
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     attempts = Attempt.objects.filter(quiz=quiz, attempter__user=user)
@@ -165,7 +167,7 @@ def AttemptDetail(request, course_id, module_id, quiz_id, attempt_id):
     return render(request, "quiz/attemptdetail.html", context)
 
 
-def CourseQuizzes(request, course_id):
+def course_quizzes(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 

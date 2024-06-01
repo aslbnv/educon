@@ -20,7 +20,7 @@ def index(request):
 
 
 @login_required
-def AssignedCourses(request):
+def assigned_courses(request):
     if request.user.is_staff:
         return redirect("index")
     profile = Profile.objects.get(user=request.user)
@@ -50,7 +50,7 @@ def AssignedCourses(request):
 
 
 @login_required
-def NewCourse(request):
+def new_course(request):
     if request.user.is_staff == False:
         return redirect("index")
 
@@ -81,7 +81,7 @@ def NewCourse(request):
 
 
 @login_required
-def CourseDetail(request, course_id):
+def course_detail(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     teacher_mode = False
@@ -98,7 +98,7 @@ def CourseDetail(request, course_id):
 
 
 @login_required
-def Enroll(request, course_id):
+def enroll(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     course.enrolled.add(user)
@@ -107,7 +107,7 @@ def Enroll(request, course_id):
 
 
 @login_required
-def DeleteCourse(request, course_id):
+def delete_course(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
 
@@ -123,7 +123,7 @@ def DeleteCourse(request, course_id):
 
 
 @login_required
-def EditCourse(request, course_id):
+def edit_course(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
 
@@ -154,7 +154,7 @@ def EditCourse(request, course_id):
 
 
 @login_required
-def MyCourses(request):
+def my_courses(request):
     if request.user.is_staff == False:
         return redirect("index")
 

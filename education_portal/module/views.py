@@ -6,7 +6,7 @@ from module.models import Module
 from classroom.models import Course
 
 
-def NewModule(request, course_id):
+def new_module(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
 
@@ -34,7 +34,7 @@ def NewModule(request, course_id):
     return render(request, "module/newmodule.html", context)
 
 
-def CourseModules(request, course_id):
+def course_modules(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 

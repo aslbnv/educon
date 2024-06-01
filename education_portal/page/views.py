@@ -9,7 +9,7 @@ from page.forms import NewPageForm
 
 
 @login_required
-def NewPageModule(request, course_id, module_id):
+def new_page_module(request, course_id, module_id):
     if request.user.is_staff == False:
         return redirect("index")
 
@@ -47,7 +47,7 @@ def NewPageModule(request, course_id, module_id):
     return render(request, "page/newpage.html", context)
 
 
-def PageDetail(request, course_id, module_id, page_id):
+def page_detail(request, course_id, module_id, page_id):
     page = get_object_or_404(Page, id=page_id)
 
     context = {
