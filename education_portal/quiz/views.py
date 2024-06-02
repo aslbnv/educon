@@ -12,7 +12,7 @@ from authy.models import Profile
 from datetime import datetime
 
 
-def new_quiz(request, course_id):
+def new_test(request, course_id):
     if request.user.is_staff == False:
         return redirect("index")
     user = request.user
@@ -167,7 +167,7 @@ def attempt_detail(request, course_id, module_id, quiz_id, attempt_id):
     return render(request, "quiz/attemptdetail.html", context)
 
 
-def course_quizzes(request, course_id):
+def course_test(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
 

@@ -9,18 +9,11 @@ from authy.models import Profile
 
 @login_required
 def index(request):
-    user = request.user
-    courses = Course.objects.filter(enrolled=user)
-
-    context = {
-        "courses": courses,
-    }
-
-    return render(request, "index.html", context)
+    return render(request, "index.html")
 
 
 @login_required
-def assigned_courses(request):
+def my_courses(request):
     if request.user.is_staff:
         return redirect("index")
     profile = Profile.objects.get(user=request.user)
@@ -77,7 +70,7 @@ def new_course(request):
         "form": form,
     }
 
-    return render(request, "classroom/newcourse.html", context)
+    return render(request, "classroom/new-course.html", context)
 
 
 @login_required
@@ -95,15 +88,6 @@ def course_detail(request, course_id):
     }
 
     return render(request, "classroom/course.html", context)
-
-
-@login_required
-def enroll(request, course_id):
-    user = request.user
-    course = get_object_or_404(Course, id=course_id)
-    course.enrolled.add(user)
-
-    return redirect("index")
 
 
 @login_required

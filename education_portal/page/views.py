@@ -9,7 +9,7 @@ from page.forms import NewPageForm
 
 
 @login_required
-def new_page_module(request, course_id, module_id):
+def new_page(request, course_id, module_id):
     if request.user.is_staff == False:
         return redirect("index")
 

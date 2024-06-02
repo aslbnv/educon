@@ -33,7 +33,6 @@ class Course(models.Model):
         User, on_delete=models.CASCADE, related_name="course_owner"
     )
     modules = models.ManyToManyField(Module)
-    enrolled = models.ManyToManyField(User)
     quizzes = models.ManyToManyField(Quizzes)
 
     def __str__(self):
