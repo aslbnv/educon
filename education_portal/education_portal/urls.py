@@ -23,11 +23,11 @@ from django.conf.urls.static import static
 from classroom.views import index
 
 urlpatterns = [
-    path("admin", admin.site.urls),
-    path("", include("authy.urls")),
-    path("courses/", include("classroom.urls")),
-    path("ckeditor/", include("ckeditor_uploader.urls")),
-    path("control/", include("learningcontrol.urls")),
-    path("statistics", include("user_statistics.urls")),
     path("", index, name="index"),
+    path("", include("authy.urls")),
+    path("admin", admin.site.urls),
+    path("statistics", include("user_statistics.urls")),
+    path("courses/", include("classroom.urls")),
+    path("control/", include("learningcontrol.urls")),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -36,7 +36,7 @@ def UserProfile(request, username):
     return HttpResponse(template.render(context, request))
 
 
-def Signup(request):
+def sign_up(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -52,7 +52,7 @@ def Signup(request):
                 first_name=first_name,
                 last_name=last_name,
             )
-            return redirect("edit-profile")
+            return redirect("profile")
     else:
         form = SignupForm()
 
@@ -64,7 +64,7 @@ def Signup(request):
 
 
 @login_required
-def PasswordChange(request):
+def change_password(request):
     user = request.user
     if request.method == "POST":
         form = ChangePasswordForm(request.POST)
@@ -73,7 +73,7 @@ def PasswordChange(request):
             user.set_password(new_password)
             user.save()
             update_session_auth_hash(request, user)
-            return redirect("change_password_done")
+            return redirect("password-change-done")
     else:
         form = ChangePasswordForm(instance=user)
 
@@ -85,12 +85,12 @@ def PasswordChange(request):
 
 
 @login_required
-def PasswordChangeDone(request):
+def password_change_done(request):
     return render(request, "change_password_done.html")
 
 
 @login_required
-def EditProfile(request):
+def profile(request):
     user = request.user
     profile = Profile.objects.get(user__id=user.id)
     user_data = User.objects.get(id=user.id)
