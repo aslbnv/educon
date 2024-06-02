@@ -84,15 +84,15 @@ def unassign_course(request, profile_id):
         if form.is_valid():
             course = form.cleaned_data.get("course")
             profile.assigned_courses.filter(course=course).delete()
-            # Also delete user attempts in course quiz
+            # also delete user attempts in course quiz
             quizzes = course.quizzes.all()
-            # Get user and quiz
+            # get user and quiz
             user = profile.user
             if quizzes.exists():
                 quiz = quizzes.first()
             else:
                 quiz = None
-            # Delete attempters
+            # delete attempters
             if quiz and user:
                 attempters = Attempter.objects.filter(quiz=quiz, user=user)
                 if attempters.exists():

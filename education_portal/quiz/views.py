@@ -112,22 +112,22 @@ def submit_attempt(request, course_id, quiz_id):
         questions_number = len(questions)
         resolved_questions_number = 0
 
-        # Проверка ответов на правильность
+        # check answer for correctness
         for q, a in zip(questions, answers):
             question = Question.objects.get(id=q)
             answer = Answer.objects.get(id=a)
 
-            # Создание попытки
+            # create attempt
             Attempt.objects.create(
                 quiz=quiz, attempter=attempter, question=question, answer=answer
             )
 
-            # Если ответ правильный, увеличиваем счетчик
+            # if answer is correct, increase counter
             if answer.is_correct:
                 resolved_questions_number += 1
 
-        # Отмечаем курс пройденным и устанавливаем время прохождения если
-        # количество решенных вопросов равно всему количеству вопросов
+        # mark course as completed and set completion time if
+        # count of doned answer equal to total answers count
         if resolved_questions_number == questions_number:
             profile = Profile.objects.get(user=request.user)
             course = get_object_or_404(Course, id=course_id)
@@ -143,8 +143,7 @@ def submit_attempt(request, course_id, quiz_id):
             attempter.test_completed = True
             attempter.save()
 
-        # Устанавливаем счет экзаменуемомго, он равен количеству
-        # решенных вопросов
+        # set score of attempter, if score is equal to amount of doned questions
         attempter.score = resolved_questions_number
         attempter.save()
 

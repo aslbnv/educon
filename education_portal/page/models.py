@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 
 
 def user_directory_path(instance, filename):
-    # Файл будет загружен в MEDIA_ROOT/user_id/file
+    # file will be uploaded in MEDIA_ROOT/user_id/file
     return "user_{0}/{1}".format(instance.user.id, filename)
 
 
