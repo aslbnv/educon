@@ -10,10 +10,9 @@
 <div class="row">
     <div class="col s12">
         <ul class="tabs">
-            <li class="tab col s3"><a href="#test1" class="">Всего</a></li>
-            <li class="tab col s3"><a href="#test2" class="">Сегодня</a></li>
-            <li class="tab col s3"><a href="#test3" class="">Test 3</a></li>
-            <li class="tab col s3"><a href="#test4" class="">Test 4</a></li>
+            <li class="tab col s4"><a href="#test1">Всего</a></li>
+            <li class="tab col s4"><a href="#test2">По дате</a></li>
+            <li class="tab col s4"><a href="#test3">Обновления</a></li>
         </ul>
     </div>
     <div id="test1">
@@ -26,7 +25,9 @@
                         <span class="green-text text-darken-1">пройдено</span>
                     </a>
                     <a class="collection-item">
-                        <span class="badge black-text"><b style="font-weight: 500;">{{ not_completed_courses }}</b></span>
+                        <span class="badge black-text">
+                            <b style="font-weight: 500;">{{ not_completed_courses }}</b>
+                        </span>
                         <span class="black-text">Всего курсов</span>
                         <span class="red-text text-darken-1">не пройдено</span>
                     </a>
@@ -42,9 +43,8 @@
             </div>
         </div>
     </div>
-    <div id="test2" class="col s12">Сегодня</div>
-    <div id="test3" class="col s12">Test 3</div>
-    <div id="test4" class="col s12">Test 4</div>
+    <div id="test2" class="col s12">По дате</div>
+    <div id="test3" class="col s12">Обновления</div>
 </div>
 {% endblock %}
 
