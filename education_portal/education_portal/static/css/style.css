@@ -1,18 +1,36 @@
 /* Custom Stylesheet to override Materialize files */
 
-/* label focus color */
 .input-field input:focus+label {
     color: #08549c !important;
 }
 
-/* label underline focus color */
 .row .input-field input:focus {
     border-bottom: 1px solid #08549c !important;
     box-shadow: 0 1px 0 0 #08549c !important
 }
 
-/* label underline focus color */
 .row .input input:focus {
     border-bottom: 1px solid #08549c !important;
     box-shadow: 0 1px 0 0 #08549c !important
+}
+
+.tabs .tab a {
+    color: #000;
+}
+
+.tabs .indicator {
+    background-color: #08549c;
+}
+
+.tabs .tab a.active {
+    color: #08549c;
+}
+
+.tabs .tab a:hover {
+    background-color: #eee;
+    color: #000;
+}
+
+.tabs .tab a:focus.active {
+    background-color: transparent;
 }
