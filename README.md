@@ -1,33 +1,34 @@
-# О проекте
-Целью проекта являлась разработка системы управления обучением. Основной функционал системы:
+# About
+Goal of the project is to develop a LMS for employee education.
 
- - Создание учебных курсов
- - Наполнение курсов контентом
- - Распределение курсов по пользователям
- - Возможность пройти курс
- - Отслеживание прогресса обучения пользователей
+Main functionality:
 
- В системе есть две роли пользователей: обычный пользователь и администратор.
+ - Creation of education courses
+ - Filling courses with content
+ - Distribution of courses by users
+ - Opportunity to take a course
+ - Tracking user education progress
 
-# Запуск
-Склонируйте репозиторий в удобное для вас место
+ There are two roles in the system - employee and administrator.
+
+# Setup
+Clone this repo and cd in it
 ```
 git clone git@github.com:temsolv/educon.git
 ```
 
-Создайте виртуальное окружение в корневой директории проекта
+Create virtual environment and activate it
 ```
 python -m venv venv_name
 ```
 
-Активируйте виртуальное окружение и установите пакеты, необходимые для работы приложения
+Install necessary packages
 ```
-venv_name/scripts/activate
 pip install -r requirements.txt
 ```
 
-Запустите фоновые задачи и локальный веб-сервер
+Run background tasks and local server
 ```
-python manage.py process_tasks
-python manage.py runserver
+make run
+make tasks
 ```
