@@ -2,7 +2,6 @@ from django.urls import path
 from django.contrib.auth import views as authViews 
 
 from authy.views import (
-    UserProfile,
     sign_up,
     change_password,
     password_change_done,

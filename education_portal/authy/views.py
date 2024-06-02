@@ -5,35 +5,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from django.db.models import Sum
-from django.db import transaction
-from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse, resolve
-from django.core.paginator import Paginator
-
-
-def SideNavInfo(request):
-    user = request.user
-    nav_profile = None
-
-    if user.is_authenticated:
-        nav_profile = Profile.objects.get(user=user)
-
-    return {"nav_profile": nav_profile}
-
-
-def UserProfile(request, username):
-    user = get_object_or_404(User, username=username)
-    profile = Profile.objects.get(user=user)
-
-    template = loader.get_template("registration/user_details.html")
-
-    context = {
-        "profile": profile,
-    }
-
-    return HttpResponse(template.render(context, request))
 
 
 def sign_up(request):
@@ -93,7 +64,6 @@ def password_change_done(request):
 def profile(request):
     user = request.user
     profile = Profile.objects.get(user__id=user.id)
-    user_data = User.objects.get(id=user.id)
     init_data = {
         "username": user.username,
         "first_name": user.first_name,
@@ -105,22 +75,16 @@ def profile(request):
     if request.method == "POST":
         form = EditProfileForm(request.POST, initial=init_data)
         if form.is_valid():
-            user_data.username = form.cleaned_data.get("username")
-            user_data.first_name = form.cleaned_data.get("first_name")
-            user_data.last_name = form.cleaned_data.get("last_name")
+            user.username = form.cleaned_data.get("username")
+            user.first_name = form.cleaned_data.get("first_name")
+            user.last_name = form.cleaned_data.get("last_name")
+            user.email = form.cleaned_data.get("email")
             profile.patronymic = form.cleaned_data.get("patronymic")
-            user_data.email = form.cleaned_data.get("email")
-            user_data.save()
+
+            user.save()
             profile.save()
             return redirect("index")
     else:
-        init_data = {
-            "username": user.username,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "patronymic": profile.patronymic,
-            "email": user.email,
-        }
         form = EditProfileForm(initial=init_data)
 
     context = {

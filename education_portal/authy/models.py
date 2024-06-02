@@ -1,10 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django.conf import settings
 
-import os
-from PIL import Image
 from classroom.models import Course
 from learningcontrol.models import AssignedCourses
 
