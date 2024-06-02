@@ -16,30 +16,72 @@
             <li class="tab col s3"><a href="#test4" class="">Test 4</a></li>
         </ul>
     </div>
-    <div id="test1" class="col s6">
-        <div class="collection">
-            <a class="collection-item tooltipped" data-position="right"
-                data-tooltip="Количество пройденных курсов за всё время">
-                <span class="badge black-text"><b style="font-weight: 500;">14</b></span>
-                <span class="black-text">Всего курсов</span>
-                <span class="green-text text-darken-1">пройдено</span>
-            </a>
-            <a class="collection-item tooltipped" data-position="right"
-                data-tooltip="Количество не пройденных курсов за всё время">
-                <span class="badge black-text"><b style="font-weight: 500;">8</b></span>
-                <span class="black-text">Всего курсов</span>
-                <span class="red-text text-darken-1">не пройдено</span>
-            </a>
-            <a class="collection-item tooltipped" data-position="right"
-                data-tooltip="Количество просроченных курсов за всё время">
-                <span class="badge black-text"><b style="font-weight: 500;">3</b></span>
-                <span class="black-text">Всего курсов</span>
-                <span class="yellow-text text-darken-2">просрочено</span>
-            </a>
+    <div id="test1">
+        <div class="row">
+            <div class="col s6">
+                <div class="collection">
+                    <a class="collection-item">
+                        <span class="badge black-text"><b style="font-weight: 500;">{{ completed_courses }}</b></span>
+                        <span class="black-text">Всего курсов</span>
+                        <span class="green-text text-darken-1">пройдено</span>
+                    </a>
+                    <a class="collection-item">
+                        <span class="badge black-text"><b style="font-weight: 500;">{{ not_completed_courses }}</b></span>
+                        <span class="black-text">Всего курсов</span>
+                        <span class="red-text text-darken-1">не пройдено</span>
+                    </a>
+                    <a class="collection-item">
+                        <span class=" badge black-text"><b style="font-weight: 500;">{{ overdue_courses }}</b></span>
+                        <span class="black-text">Всего курсов</span>
+                        <span class="yellow-text text-darken-2">просрочено</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col s6">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
-    <div id="test2" class="col s12">Test 2</div>
+    <div id="test2" class="col s12">Сегодня</div>
     <div id="test3" class="col s12">Test 3</div>
     <div id="test4" class="col s12">Test 4</div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Пройденные', 'Не пройденные', 'Просроченные'],
+                datasets: [{
+                    label: 'Количество',
+                    data: [
+                        {{ completed_courses }},
+                {{ not_completed_courses }},
+                        {{ overdue_courses }},
+                    ],
+        backgroundColor: [
+        'rgba(56, 142, 60, 0.2)',  // Green darken-1
+        'rgba(229, 57, 53, 0.2)',  // Red darken-1
+        'rgba(251, 192, 45, 0.2)'  // Yellow darken-2
+    ],
+        borderColor: [
+        'rgba(56, 142, 60, 1)',  // Green darken-1
+        'rgba(229, 57, 53, 1)',  // Red darken-1
+        'rgba(251, 192, 45, 1)'  // Yellow darken-2
+    ],
+        borderWidth: 1
+                }]
+            },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+    }
+        });
+    });
+</script>
 {% endblock %}
