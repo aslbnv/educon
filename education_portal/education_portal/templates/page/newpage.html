@@ -6,7 +6,7 @@
     <div class="col s12">
         <form method="post" enctype="multipart/form-data" action="" role="form">
             {% csrf_token %}
-            <h4 class="title is-3">Создание новой страницы</h4>
+            <h5>Создание новой страницы</h5>
 
             <div class="input-field col s12">
                 <p class="left" style="margin: 0;">Название</p>
@@ -19,7 +19,7 @@
 
             <div class="row">
                 <div class="file-field input-field col s12">
-                    <div class="btn-small blue darken-4">
+                    <div class="btn-small light-blue darken-4">
                         <i class="material-icons">attach_file</i>
                         {{ form.files }}
                     </div>
