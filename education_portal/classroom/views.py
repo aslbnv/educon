@@ -69,7 +69,7 @@ def new_course(request):
                 syllabus=syllabus,
                 user=user,
             )
-            return redirect("my-courses")
+            return redirect("manage-courses")
     else:
         form = NewCourseForm()
 
@@ -119,7 +119,7 @@ def delete_course(request, course_id):
     else:
         course.delete()
 
-    return redirect("my-courses")
+    return redirect("manage-courses")
 
 
 @login_required
@@ -141,7 +141,7 @@ def edit_course(request, course_id):
                 course.description = form.cleaned_data.get("description")
                 course.syllabus = form.cleaned_data.get("syllabus")
                 course.save()
-                return redirect("my-courses")
+                return redirect("manage-courses")
         else:
             form = NewCourseForm(instance=course)
 
@@ -154,7 +154,7 @@ def edit_course(request, course_id):
 
 
 @login_required
-def my_courses(request):
+def manage_courses(request):
     if request.user.is_staff == False:
         return redirect("index")
 

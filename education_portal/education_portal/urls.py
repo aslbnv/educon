@@ -28,5 +28,6 @@ urlpatterns = [
     path("courses/", include("classroom.urls")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("control/", include("learningcontrol.urls")),
+    path("statistics/", include("user_statistics.urls")),
     path("", index, name="index"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

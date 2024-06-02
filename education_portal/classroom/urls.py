@@ -1,6 +1,6 @@
 from django.urls import path
 
-from classroom.views import new_course, enroll, delete_course, edit_course, my_courses
+from classroom.views import new_course, enroll, delete_course, edit_course, manage_courses
 from classroom.views import course_detail, assigned_courses
 from module.views import new_module, course_modules
 from page.views import new_page_module, page_detail
@@ -9,7 +9,7 @@ from quiz.views import new_question, new_quiz, quiz_detail, take_quiz, submit_at
 urlpatterns = [
     # Курс
     path('newcourse', new_course, name='newcourse'),
-    path('mycourses', my_courses, name='my-courses'),
+    path('manage', manage_courses, name='manage-courses'),
     path('assigned', assigned_courses, name='courses'),
     path('<course_id>', course_detail, name='course'),
     path('<course_id>/enroll', enroll, name='enroll'),

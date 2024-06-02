@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     "module",
     "page",
     "quiz",
+    "user_statistics",
     "learningcontrol",
-    "stats",
     "background_task",
 ]
 
