@@ -1,8 +1,10 @@
+# Educon
+![alt text](main.gif)
+
 # About
 Goal of the project is to develop a LMS for employee education.
 
 There are two roles in the system - **administrator** and **employee**.
-
 
 Main functionality:
 
@@ -35,6 +37,12 @@ Activate it and install necessary packages
 ```
 source venv/bin/activate
 pip install -r requirements.txt
+```
+
+Do migrations
+```
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 Run background tasks and local server
