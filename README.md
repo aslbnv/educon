@@ -12,7 +12,7 @@ Main functionality:
  There are two roles in the system - employee and administrator.
 
 # Requirements
-- Python = *3.8.0*
+- Python = **3.8.0**
 
 # Setup
 Clone this repo and cd in it
