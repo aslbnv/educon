@@ -1,11 +1,8 @@
-run:
-	python education_portal/manage.py runserver
+VENV = venv
+PYTHON = $(VENV)/bin/python3
 
-tasks:
-	python education_portal/manage.py process_tasks
+venv: clean
+	python3 -m venv $(VENV)
 
-makemigrations:
-	python education_portal/manage.py makemigrations
-
-migrate:
-	python education_portal/manage.py migrate
+clean: 
+	rm -rf $(VENV)
