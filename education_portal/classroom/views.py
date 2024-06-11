@@ -70,7 +70,7 @@ def new_course(request):
         "form": form,
     }
 
-    return render(request, "classroom/new-course.html", context)
+    return render(request, "classroom/newcourse.html", context)
 
 
 @login_required
