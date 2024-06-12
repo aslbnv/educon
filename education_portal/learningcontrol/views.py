@@ -3,14 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from authy.models import Profile
 from learningcontrol.models import AssignedCourses
-from learningcontrol.forms import (
-    AssignCourseForm,
-    UnassignCourseForm,
-    EmployeeLastnameFilterForm,
-)
-from learningcontrol.tasks import check_deadlines
+from learningcontrol.forms import AssignCourseForm, UnassignCourseForm, EmployeeLastnameFilterForm,
+from authy.models import Profile
 from quiz.models import Attempter
 
 
