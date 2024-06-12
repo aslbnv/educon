@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from classroom.models import Course, Category
+from classroom.models import Course
 from classroom.forms import NewCourseForm
 from authy.models import Profile
 

@@ -1,6 +1,6 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
-from classroom.models import Course, Category
+from classroom.models import Course
 
 
 class NewCourseForm(forms.ModelForm):
