@@ -6,7 +6,7 @@ from authy.models import Profile
 
 
 def ForbiddenUsers(value):
-	forbidden_users = ['admin', 'css', 'js', 'authenticate', 'login', 'logout',
+	forbidden_users = ['css', 'js', 'authenticate', 'login', 'logout',
 	'administrator', 'root', 'email', 'user', 'join', 'sql', 'static', 'python','delete']
 
 	if value.lower() in forbidden_users:
@@ -95,10 +95,10 @@ class ChangePasswordForm(forms.ModelForm):
 
 class EditProfileForm(forms.ModelForm):
 	username = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
-	first_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
-	last_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
+	first_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
+	last_name = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
 	patronymic = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
-	email = forms.CharField(widget=forms.TextInput(), max_length=50, required=True)
+	email = forms.CharField(widget=forms.TextInput(), max_length=50, required=False)
 	
 	class Meta:
 		model = User

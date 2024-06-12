@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from learningcontrol.models import AssignedCourses
-from learningcontrol.forms import AssignCourseForm, UnassignCourseForm, EmployeeLastnameFilterForm,
+from learningcontrol.forms import AssignCourseForm, UnassignCourseForm, EmployeeLastnameFilterForm
 from authy.models import Profile
 from quiz.models import Attempter
 
