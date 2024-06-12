@@ -74,7 +74,7 @@ def new_course(request):
 
 
 @login_required
-def course_detail(request, course_id):
+def course(request, course_id):
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     teacher_mode = False

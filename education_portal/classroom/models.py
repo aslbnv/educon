@@ -24,7 +24,7 @@ class Category(models.Model):
 
 
 class Course(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.AutoField(primary_key=True)
     picture = models.ImageField(upload_to=user_directory_path)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=300)

@@ -16,7 +16,9 @@
         <div class="card hoverable sticky-action">
             <!-- image -->
             <div class="card-image" style="height: 200;">
-                <img src="{{ course.picture.url }}" style="height: 100%;">
+                <a href="{% url 'course' course.id %}">
+                    <img src="{{ course.picture.url }}" style="height: 100%;">
+                </a>
             </div>
 
             <!-- card content -->
