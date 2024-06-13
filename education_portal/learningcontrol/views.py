@@ -5,18 +5,22 @@ from django.contrib import messages
 
 from learningcontrol.models import AssignedCourses
 from learningcontrol.forms import AssignCourseForm, UnassignCourseForm, EmployeeLastnameFilterForm
-from authy.models import Profile
+
+from authy.models import Profile, Role
 from quiz.models import Attempter
 
 
 @login_required
 def employee_profiles(request):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
 
     form = EmployeeLastnameFilterForm(request.GET)
+
     last_name = request.GET.get("last_name")
     last_name_format = ""
+
+    # Formatting last name to first letter big, next small
     if last_name != None:
         for i in range(len(last_name)):
             if i == 0:
@@ -24,12 +28,14 @@ def employee_profiles(request):
             else:
                 last_name_format += last_name[i].lower()
 
-    profiles = Profile.objects.filter(role="user")
+    # Get employee with USER role
+    user_role = Role.objects.get(name="user")
+    profiles = Profile.objects.filter(role=user_role)
+
     if last_name:
         profiles = profiles.filter(user__last_name__icontains=last_name_format)
 
     context = {
-        "users": User.objects.filter(is_staff=False),
         "profiles": profiles,
         "form": form,
     }
@@ -39,8 +45,9 @@ def employee_profiles(request):
 
 @login_required
 def assign_course(request, profile_id):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
+
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == "POST":
         form = AssignCourseForm(request.POST)
@@ -71,8 +78,9 @@ def assign_course(request, profile_id):
 
 @login_required
 def unassign_course(request, profile_id):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
+        
     profile = get_object_or_404(Profile, id=profile_id)
     if request.method == "POST":
         form = UnassignCourseForm(request.POST, profile=profile)

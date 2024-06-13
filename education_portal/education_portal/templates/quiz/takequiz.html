@@ -4,11 +4,6 @@
 {% block content %}
 <h5>{{ quiz.title }}</h5>
 
-<div class="col s12">
-    {{ quiz.description | safe }}
-    <div class="divider"></div>
-</div>
-
 <form method="post" action="{% url 'submit-quiz' course_id quiz.id %}" role="form" class="col s12">
     {% csrf_token %}
     {% for question in quiz.questions.all %}
@@ -32,14 +27,14 @@
         <div class="divider"></div>
         <br>
 
-        {% if profile.role == 'user' %}
-        <div class="">
+        {% if profile.role.name == 'user' %}
+        <div>
             <button type="submit" value="login" class="btn green darken-1">
                 Завершить тест
             </button>
         </div>
         {% else %}
-        <a href="{% url 'course-test' course_id %}" class="btn red darken-1">
+        <a href="{% url 'quiz-detail' course_id quiz.id %}" class="btn red darken-1">
             Назад
         </a>
 

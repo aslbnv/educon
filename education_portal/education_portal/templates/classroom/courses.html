@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="section">
-    <h5>Текущие курсы</h5>
+    <h5>Назначенные курсы</h5>
     <div class="divider"></div>
 </div>
 
@@ -45,31 +45,28 @@
 </div>
 
 <div class="section">
-    <h5>Пройденные курсы</h5>
+    <h5>Завершённые курсы</h5>
     <div class="divider"></div>
 </div>
 
 <div class="row">
     {% if not completed_courses %}
-    <span>У вас пока нет пройденных курсов</span>
+    <span>У вас пока нет завершённых курсов</span>
     {% endif %}
 
     <ul class="collection">
         {% for cc in completed_courses %}
         <li class="collection-item avatar">
             <img src="{{ cc.course.picture.url }}" class="circle">
-            <span class="title" style="font-weight: 400;">{{ cc.course.title }}</span>
-            <p>
-                <span class="grey-text text-darken-1" style="font-size: 14;">{{ cc.course.description }}</span>
+                <span class="title" >{{ cc.course.title }}</span>
                 <br>
-                Выполнен:
-                {% if cc.completion_date %}
-                <span class="green-text text-darken-1">{{ cc.completion_date }}</span>
-                {% endif %}
-            </p>
-            <a href="{% url 'course' cc.course.id %}" class="secondary-content">
-                <i class="material-symbols-outlined light-blue-text text-darken-4">open_in_new</i>
-            </a>
+                    <span class="grey-text text-darken-1" style="font-size: 14;">{{ cc.course.description }}</span>
+                    <br>
+                    Выполнен:
+                    {% if cc.completion_date %}
+                    <span class="green-text text-darken-1">{{ cc.completion_date }}</span>
+                    {% endif %}
+                <a href="{% url 'course' cc.course.id %}" class="secondary-content"><i class="material-icons light-blue-text text-darken-4">open_in_new</i></a>
         </li>
         {% endfor %}
     </ul>

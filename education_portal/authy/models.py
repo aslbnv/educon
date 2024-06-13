@@ -17,7 +17,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True, blank=True)
     patronymic = models.CharField(max_length=50, null=True, blank=True)
-    assigned_courses = models.ManyToManyField(AssignedCourses)
+    assigned_courses = models.ManyToManyField(AssignedCourses, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -29,7 +29,8 @@ class Profile(models.Model):
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance, role="user")
+        user_role, created = Role.objects.get_or_create(name="user")
+        Profile.objects.create(user=instance, role=user_role)
 
 
 def save_user_profile(sender, instance, **kwargs):

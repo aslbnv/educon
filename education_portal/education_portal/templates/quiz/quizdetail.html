@@ -3,12 +3,35 @@
 
 {% block content %}
 <div class="section">
+    {% if profile.role.name != 'user' %}
+    <a href="{% url 'take-quiz' course_id quiz.id %}" class="btn green darken-1 right">
+        <span>Редактировать вопросы</span>
+    </a>
+    {% endif %}
     <h5>{{ quiz.title }}</h5>
     <div class="divider"></div>
 </div>
 {{ quiz.description | safe }}
 
-<br>
+
+
+{% if profile.role.name == 'user' %}
+<blockquote style="border-left-color: blue;">
+    <span>Всего вопросов в тесте: <span style="font-weight: 500;">{{ max_score }}</span></span>
+    <br>
+    <span>
+        Чтобы сдать тест, ответьте минимум на 
+        <span style="font-weight: 500;">
+            {% if quiz.points_to_pass %}
+            {{ quiz.points_to_pass }}
+            {% else %}
+            {{ max_score }}
+            {% endif %}
+        </span>
+        из них
+    </span>
+</blockquote>
+
 <table class="highlight">
     <thead>
         <tr>
@@ -17,14 +40,11 @@
             <th style="font-weight: 600;">Результат</th>
         </tr>
     </thead>
-
     <tbody>
         {% for attempt in my_attempts %}
         <tr>
-            <td>
-                <a href="">Попытка {{ forloop.counter }}</a>
-            </td>
-            <td>{{ attempt.score }} / {{ max_score }}</td>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ attempt.score }} из {{ max_score }}</td>
             <td>
                 {% if attempt.test_completed %}
                 <span class="green-text text-darken-1">Пройден</span>
@@ -36,6 +56,30 @@
         {% endfor %}
     </tbody>
 </table>
+
 <br>
 <a class="btn green darken-1" href="{% url 'take-quiz' course_id quiz.id %}">Пройти тест</a>
+{% endif %}
+
+{% if profile.role.name != 'user' %}
+<div class="divider"></div>
+<br>
+
+<span style="font-weight: 500;">Количество вопросов:</span>
+<span>{{ max_score }}</span>
+
+<br>
+<br>
+
+<span style="font-weight: 500;">Количество правильных ответов для сдачи теста:</span>
+<div class="row">
+    <div class="col s1" style="padding: 0;">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn green darken-1 center">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

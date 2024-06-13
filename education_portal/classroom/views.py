@@ -44,7 +44,7 @@ def my_courses(request):
 
 @login_required
 def new_course(request):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
 
     user = request.user
@@ -92,7 +92,7 @@ def course(request, course_id):
 
 @login_required
 def delete_course(request, course_id):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
 
     user = request.user
@@ -107,39 +107,8 @@ def delete_course(request, course_id):
 
 
 @login_required
-def edit_course(request, course_id):
-    if request.user.is_staff == False:
-        return redirect("index")
-
-    user = request.user
-    course = get_object_or_404(Course, id=course_id)
-
-    if user != course.user:
-        return HttpResponseForbidden()
-    else:
-        if request.method == "POST":
-            form = NewCourseForm(request.POST, request.FILES, instance=course)
-            if form.is_valid():
-                course.picture = form.cleaned_data.get("picture")
-                course.title = form.cleaned_data.get("title")
-                course.description = form.cleaned_data.get("description")
-                course.syllabus = form.cleaned_data.get("syllabus")
-                course.save()
-                return redirect("manage-courses")
-        else:
-            form = NewCourseForm(instance=course)
-
-    context = {
-        "form": form,
-        "course": course,
-    }
-
-    return render(request, "classroom/editcourse.html", context)
-
-
-@login_required
 def manage_courses(request):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
 
     user = request.user

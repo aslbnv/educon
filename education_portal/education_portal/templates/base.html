@@ -19,8 +19,6 @@
         <li><a href="{% url 'manage-courses' %}"><span class="black-text">Курсы</span></a></li>
         <li><a href="{% url 'employees' %}"><span class="black-text">Пользователи</span></a></li>
         <li><a href="{% url 'user-statistics' %}"><span class="black-text">Статистика</span></a></li>
-        <li class="divider"></li>
-        <li><a href="{% url 'admin:index' %}"><span class="black-text">Django admin</span></a></li>
     </ul>
     <ul id="user-panel" class="dropdown-content">
         <li><a href="{% url 'profile' %}"><span class="black-text">Профиль</span></a></li>
@@ -35,7 +33,7 @@
                 Educon
             </a>
 
-            {% if user.profile.role == 'user' %}
+            {% if user.profile.role.name == 'user' %}
             <ul class="hide-on-med-and-down" style="margin-left: 150px;">
                 <li>
                     <a href="{% url 'my-courses' %}">
@@ -48,7 +46,7 @@
             {% endif %}
 
             <ul class="right hide-on-med-and-down">
-                {% if user.profile.role == 'admin' %}
+                {% if user.profile.role.name == 'admin' %}
                 <li><a class="dropdown-trigger" data-target="admin-panel">Панель администратора</a></li>
                 {% endif %}
                 <li>

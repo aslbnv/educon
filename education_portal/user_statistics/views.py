@@ -7,7 +7,7 @@ from learningcontrol.models import AssignedCourses
 # Create your views here.
 @login_required
 def user_statistics(request):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
 
     completed_courses = AssignedCourses.objects.filter(is_completed=True).count()

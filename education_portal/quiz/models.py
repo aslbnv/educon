@@ -27,6 +27,7 @@ class Quizzes(models.Model):
     title = models.CharField(max_length=200)
     description = RichTextField()
     questions = models.ManyToManyField(Question)
+    points_to_pass = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.title

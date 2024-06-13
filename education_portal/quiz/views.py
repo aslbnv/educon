@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.urls import reverse
 
-from quiz.forms import NewQuizForm, NewQuestionForm
+from quiz.forms import NewQuizForm, NewQuestionForm, QuizDetailForm
 from quiz.models import Answer, Question, Quizzes, Attempter, Attempt
 from module.models import Module
 from classroom.models import Course
@@ -13,8 +13,9 @@ from datetime import datetime
 
 
 def new_test(request, course_id):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
+
     user = request.user
     course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
@@ -39,8 +40,9 @@ def new_test(request, course_id):
 
 
 def new_question(request, course_id, quiz_id):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
+        
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     if request.method == "POST":
@@ -74,16 +76,27 @@ def new_question(request, course_id, quiz_id):
 
 
 def quiz_detail(request, course_id, quiz_id):
-    user = request.user
+    profile = Profile.objects.get(user__id=request.user.id)
     quiz = get_object_or_404(Quizzes, id=quiz_id)
-    my_attempts = Attempter.objects.filter(quiz=quiz, user=user)
+    my_attempts = Attempter.objects.filter(quiz=quiz, user=request.user)
     max_score = sum(question.points for question in quiz.questions.all())
+
+    if request.method == "POST":
+        form = QuizDetailForm(request.POST, instance=quiz)
+        if form.is_valid():
+            form.save()
+            return redirect("quiz-detail", course_id=course_id, quiz_id=quiz_id)
+    else:
+        form = QuizDetailForm(instance=quiz)
 
     context = {
         "quiz": quiz,
         "my_attempts": my_attempts,
         "course_id": course_id,
         "max_score": max_score,
+        "profile": profile,
+        "scores": range(1, max_score),
+        "form": form,
     }
 
     return render(request, "quiz/quizdetail.html", context)
@@ -103,6 +116,9 @@ def take_quiz(request, course_id, quiz_id):
 
 
 def submit_attempt(request, course_id, quiz_id):
+    if request.user.profile.role.name != 'user':
+        return redirect("index")
+
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     if request.method == "POST":
         questions = request.POST.getlist("question")
@@ -128,12 +144,12 @@ def submit_attempt(request, course_id, quiz_id):
 
         # mark course as completed and set completion time if
         # count of doned answer equal to total answers count
-        if resolved_questions_number == questions_number:
+        if quiz.points_to_pass:
+            questions_number = quiz.points_to_pass
+        if resolved_questions_number >= questions_number:
             profile = Profile.objects.get(user=request.user)
             course = get_object_or_404(Course, id=course_id)
-            current_assigned_course = profile.assigned_courses.filter(
-                course=course
-            ).first()
+            current_assigned_course = profile.assigned_courses.filter(course=course).first()
 
             if current_assigned_course:
                 current_assigned_course.is_completed = True
@@ -153,6 +169,9 @@ def submit_attempt(request, course_id, quiz_id):
 
 
 def attempt_detail(request, course_id, module_id, quiz_id, attempt_id):
+    if request.user.profile.role.name != 'user':
+        return redirect("index")
+
     user = request.user
     quiz = get_object_or_404(Quizzes, id=quiz_id)
     attempts = Attempt.objects.filter(quiz=quiz, attempter__user=user)

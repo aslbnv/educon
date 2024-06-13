@@ -7,7 +7,7 @@ from classroom.models import Course
 
 
 def new_module(request, course_id):
-    if request.user.is_staff == False:
+    if request.user.profile.role.name != 'admin' and request.user.is_staff == False:
         return redirect("index")
 
     user = request.user

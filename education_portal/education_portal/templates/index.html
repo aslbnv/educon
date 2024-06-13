@@ -6,7 +6,7 @@
     <div class="container">
         <br>
         <h5 class="header black-text center">Здравствуйте, {{ user.first_name }}!</h5>
-        {% if user.profile.role == "admin" %}
+        {% if user.profile.role.name == "admin" %}
         <p class="center">
             Не забывайте
             <a href="{% url 'manage-courses' %}">управлять курсами</a>
@@ -16,7 +16,7 @@
         </p>
         {% endif %}
 
-        {% if user.profile.role == "user" %}
+        {% if user.profile.role.name == "user" %}
         <p class="center">
             Следите за <a href="{% url 'my-courses' %}">своим обучением</a> и регулярно посещайте данный раздел
         </p>
