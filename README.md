@@ -1,7 +1,4 @@
 # Educon
-![alt text](main.gif)
-
-# About
 Goal of the project is to develop a LMS for employee education.
 
 There are two roles in the system - **administrator** and **employee**.
